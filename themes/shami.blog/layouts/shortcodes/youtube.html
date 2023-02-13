@@ -1,15 +1,11 @@
-{{ $.Scratch.Set "videoID" (.Get "videoID") }}
-
-{{ if eq (.Get "wAspect") "" }}
+{{ if len .Params | eq 1 }}
+{{ $.Scratch.Set "hAspect" "aspect-h-9" }}
 {{ $.Scratch.Set "wAspect" "aspect-w-16" }}
+{{ $.Scratch.Set "videoID" (.Get 0) }}
 {{ else }}
 {{ $.Scratch.Set "wAspect" (.Get "wAspect") }}
-{{ end }}
-
-{{ if eq (.Get "hAspect") "" }}
-{{ $.Scratch.Set "hAspect" "aspect-h-9" }}
-{{ else }}
 {{ $.Scratch.Set "hAspect" (.Get "hAspect") }}
+{{ $.Scratch.Set "videoID" (.Get "videoID") }}
 {{ end }}
 
 <div class='{{ $.Scratch.Get "wAspect" }} {{ $.Scratch.Get "hAspect" }}'>
