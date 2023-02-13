@@ -1,0 +1,5 @@
+{{ $thumb := $.Page.Resources.GetMatch (.Get "thumbnail") }}
+{{ $full := $.Page.Resources.GetMatch (.Get "full") }}
+<figure class="center-image">
+	<img class="pure-img" data-original='{{ $thumb.RelPermalink }}' {{ if .Get "full" }}data-jslghtbx='{{ $full.RelPermalink }}'{{ end }} {{ if .Get "index" }}data-jslghtbx-index='{{ .Get "index" }}'{{ end }} {{ if .Get "group" }}data-jslghtbx-group='{{ .Get "group" }}'{{ end }} class="lazy">
+</figure>

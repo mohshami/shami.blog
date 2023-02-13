@@ -1,0 +1,7 @@
+{{ define "main" }}
+<div class="px-8 py-5 bg-white m-3 rounded-lg">
+    <p class="text-3xl font-extralight"><a href="{{ .Permalink }}">{{ .Title }}</a></p>
+    <p class="text-sm -mb-2">{{ .Date.Format "2006-01-02" }} by {{ .Site.Params.author }}</p>
+    <p>{{ .Content }}</p>
+</div>
+{{ end }}

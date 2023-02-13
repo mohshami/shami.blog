@@ -1,0 +1,9 @@
+<div class="pure-g pure-g-valign-fix center-image">
+{{ range $.Page.Params.photos }}
+	<div class="pure-u-1 pure-u-sm-8-24"><div style="padding: 10px;">
+	<img data-original="{{ index . 0 }}" class="pure-img" data-jslghtbx="{{ index . 1 }}" data-jslghtbx-group="gallery" data-jslghtbx-index="0" class="lazy">
+	</div></div>
+{{ end }}
+</div>
+
+

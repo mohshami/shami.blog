@@ -1,0 +1,39 @@
+baseURL = 'https://shami.blog/'
+languageCode = 'en-us'
+title = "Shami's Blog"
+theme = 'shami.blog'
+Paginate= 10
+
+[params]
+author = "Mohammad H. AlShami"
+
+[markup.goldmark.renderer]
+unsafe = true
+
+[markup.highlight]
+  anchorLineNos = false
+  codeFences = true
+  guessSyntax = true
+  hl_Lines = ''
+  hl_inline = false
+  lineAnchors = ''
+  lineNoStart = 1
+  lineNos = true
+  lineNumbersInTable = false
+  noClasses = false
+  noHl = false
+  style = 'rtt'
+  tabWidth = 4
+
+# [markup.highlight]
+#   codeFences = false
+
+# [markup.highlight]
+#       codeFences = false
+#       guessSyntax = false
+#       hl_Lines = ""
+#       lineNoStart = 1
+#       lineNos = false
+#       lineNumbersInTable = true
+#       tabWidth = 4
+#       noClasses = false

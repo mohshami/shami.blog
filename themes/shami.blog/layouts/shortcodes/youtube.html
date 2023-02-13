@@ -1,0 +1,17 @@
+{{ $.Scratch.Set "videoID" (.Get "videoID") }}
+
+{{ if eq (.Get "wAspect") "" }}
+{{ $.Scratch.Set "wAspect" "aspect-w-16" }}
+{{ else }}
+{{ $.Scratch.Set "wAspect" (.Get "wAspect") }}
+{{ end }}
+
+{{ if eq (.Get "hAspect") "" }}
+{{ $.Scratch.Set "hAspect" "aspect-h-9" }}
+{{ else }}
+{{ $.Scratch.Set "hAspect" (.Get "hAspect") }}
+{{ end }}
+
+<div class='{{ $.Scratch.Get "wAspect" }} {{ $.Scratch.Get "hAspect" }}'>
+    <iframe src='https://www.youtube.com/embed/{{ $.Scratch.Get "videoID" }}' frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+</div>

@@ -1,0 +1,32 @@
+{{ $pag := .Paginate (where .Data.Pages "Type" "post") }}
+{{ $first := sub $pag.PageNumber 4 }}
+{{ $last := add $pag.PageNumber 4 }}
+<div class="px-8 py-5 bg-white m-3 rounded-lg">
+	<ul class="pages">
+	{{ if $pag.HasPrev }}
+	<li class="text-blue-600"><a href="{{ $pag.First.URL }}">&laquo;First</a></li>
+	<li class="text-blue-600"><a href="{{ $pag.Prev.URL }}">&laquo;Prev</a></li>
+	{{ end }}
+
+	<li {{ if $pag.HasPrev }}class="text-blue-600"{{ end }}><a href="{{ $pag.First.URL }}">1</a></li>
+	{{ if gt $first 2 }}
+	<li>...</li>
+	{{ end }}
+
+	{{ range $pag.Pagers }}
+	{{ if and (gt .PageNumber 1) (ge .PageNumber $first) (lt .PageNumber $last) (lt .PageNumber $pag.TotalPages) }}
+	<li {{ if ne . $pag }}class="text-blue-600"{{ end }}><a href="{{ .URL }}">{{ .PageNumber }}</a></li>
+	{{ end }}
+	{{ end }}
+
+	{{ if lt $last $pag.TotalPages }}
+	<li>...</li>
+	{{ end }}
+	<li {{ if $pag.HasNext }}class="text-blue-600"{{ end }}><a href="{{ $pag.Last.URL }}">{{ $pag.TotalPages }}</a></li>
+
+	{{ if $pag.HasNext }}
+	<li class="text-blue-600"><a href="{{ $pag.Next.URL }}">Next &raquo;</a></li>
+	<li class="text-blue-600"><a href="{{ $pag.Last.URL }}">Last &raquo;</a></li>
+	{{ end }}
+	</ul>
+</div>

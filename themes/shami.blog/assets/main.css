@@ -1,0 +1,23 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+    .pages li {
+        display: inline;
+        padding-right: 5px;
+    }
+
+    .rounded-lg p {
+        /* padding-top: 5px; */
+        padding-bottom: 10px;
+    }
+
+    .chroma {
+        overflow: scroll;
+    }
+
+    code {
+        background-color:#007f7f;
+    }
+}
