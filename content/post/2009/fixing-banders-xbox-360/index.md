@@ -56,6 +56,12 @@ Since we didn't want to see an RRoD on Bander's precious Xbox, we decided to tak
 
 And the result, you ask? Drum rolls please.
 
-<p><center><a href="16.jpg" data-jslghtbx="16.jpg">badabadabadabadabadabish</a></center></p>
+<div class="spotlight-group">
+<p class="flex justify-center text-blue-600 mt-2">
+	<a class="spotlight" href="16.jpg">
+		badabadabadabadabadabish
+	</a>
+</p>
+</div>
 
 Congrats man, hope you spend many hours enjoying it.
