@@ -1,5 +1,10 @@
 {{ $thumb := $.Page.Resources.GetMatch (.Get "thumbnail") }}
-{{ $full := $.Page.Resources.GetMatch (.Get "full") }}
-<p class="flex justify-center">
-    <img src="{{ $thumb }}" alt="" loading="lazy">
-</p>
+<div class="flex justify-center">
+    {{ if isset .Params "full" }}
+    <a class="spotlight" href='{{ .Get "full" }}'>
+        <img src="{{ $thumb }}" alt="" loading="lazy">
+    </a>
+    {{ else }}
+        <img src="{{ $thumb }}" alt="" loading="lazy">
+    {{ end }}
+</div>
