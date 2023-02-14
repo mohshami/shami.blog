@@ -1,7 +1,7 @@
 {{ $pag := .Paginate (where .Data.Pages "Type" "post") }}
 {{ $first := sub $pag.PageNumber 4 }}
 {{ $last := add $pag.PageNumber 4 }}
-<div class="px-8 py-5 bg-white m-3 rounded-lg">
+<div class="px-8 py-5 bg-white m-3 rounded-lg flex justify-center">
 	<ul class="pages">
 	{{ if $pag.HasPrev }}
 	<li class="text-blue-600"><a href="{{ $pag.First.URL }}">&laquo;First</a></li>
