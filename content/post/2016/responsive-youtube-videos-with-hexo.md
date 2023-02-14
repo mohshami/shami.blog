@@ -5,6 +5,8 @@ categories:
 date: "2016-09-27 14:05:00"
 ---
 
+**Update:** I have since moved to [Hugo](https://gohugo.io) with [Tailwind CSS](https://tailwindcss.com/) and not sure if this code is still valid.
+
 So now that I have finally finished fixing my content migration issues I can get back to writing.
 
 While checking my old posts I noticed embedded using the &#123;% youtube %&#125; tag looked like this:<!--more-->
