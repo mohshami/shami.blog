@@ -7,6 +7,9 @@ Paginate= 10
 [params]
 author = "Mohammad H. AlShami"
 
+[permalinks]
+post = "/:year/:month/:title/"
+
 [markup.goldmark.renderer]
 unsafe = true
 
@@ -24,16 +27,3 @@ unsafe = true
   noHl = false
   style = 'rtt'
   tabWidth = 4
-
-# [markup.highlight]
-#   codeFences = false
-
-# [markup.highlight]
-#       codeFences = false
-#       guessSyntax = false
-#       hl_Lines = ""
-#       lineNoStart = 1
-#       lineNos = false
-#       lineNumbersInTable = true
-#       tabWidth = 4
-#       noClasses = false
