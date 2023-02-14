@@ -3,7 +3,7 @@ title: My Internet Experience
 date: 2009-10-26 20:22:50
 ---
 
-**Update: This article is no longer valid, you’ll find my updated experience with Zain [here](/2011/03/tales-of-a-disgruntled-zainjo-customer/ "Tales of a disgruntled @ZainJo customer")**
+**Update: This article is no longer valid, you’ll find my updated experience with Zain [here]({{<relref "tales-of-a-disgruntled-zainjo-customer.md">}}/ "Tales of a disgruntled @ZainJo customer")**
 
 I finally got fed up with my Orange DSL line back in April. It's 2009 and they still can't offer me anything faster than 512Kbps which was very irritating. I wish I could say the service was stable. Sadly it was expensive, disconnected on regular basis, customer care loved telling me the problem was due to internal wiring, and had a 3GB download limit. I could have upgraded to the new DSL in one bill plan but that incurred a 23JD switch fee and a 1 year commitment, which I wasn't ready to commit to. That being said, the download quota for the 512Kbps account was 7GB, which isn't much better. What annoyed me the most was the fact the bill was different every month. All of that was very far from their ads saying "Internet = Life" and the ads with a big "8", meaning 8Mpbs. It felt like Orange was taunting me, saying "We have high speed Internet, but not for the likes of you".<!--more-->
 
