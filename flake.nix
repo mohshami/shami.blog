@@ -19,7 +19,7 @@
         ];
       
       shellHook=''
-        fish
+        exec fish
       '';
       };
   };
