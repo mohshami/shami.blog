@@ -915,7 +915,19 @@ code {
 }
 
 @media (min-width: 1024px) {
+  .lg\:list-item {
+    display: list-item;
+  }
+
   .lg\:gap-2 {
     gap: 0.5rem;
+  }
+
+  .lg\:rounded-none {
+    border-radius: 0px;
+  }
+
+  .lg\:border-r-0 {
+    border-right-width: 0px;
   }
 }
