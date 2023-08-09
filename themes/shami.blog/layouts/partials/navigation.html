@@ -1,32 +1,30 @@
 {{ $pag := .Paginate (where .Data.Pages "Type" "post") }}
-{{ $first := sub $pag.PageNumber 4 }}
-{{ $last := add $pag.PageNumber 4 }}
-<div class="px-8 py-5 bg-white m-3 rounded-lg flex justify-center">
-	<ul class="pages">
-	{{ if $pag.HasPrev }}
-	<li class="text-blue-600"><a href="{{ $pag.First.URL }}">&laquo;First</a></li>
-	<li class="text-blue-600"><a href="{{ $pag.Prev.URL }}">&laquo;Prev</a></li>
-	{{ end }}
+{{ $first := sub $pag.PageNumber 1 }}
+{{ $last := add $pag.PageNumber 1 }}
+<div class="bg-white p-4 flex items-center flex-wrap justify-center">
+  <nav aria-label="Page navigation">
+	<ul class="inline-flex">
+	<li class="px-4 py-2 text-black-600 transition-colors duration-150 bg-white border border-r-0 border-black-600 rounded-l-lg focus:shadow-outline hover:bg-blue-100 hidden md:list-item {{ if $pag.HasPrev }}hover:bg-blue-100{{ else }}pointer-events-none{{ end }}"><a href="{{ $pag.First.URL }}">First</a></li>
+	<li class="px-4 py-2 text-black-600 transition-colors duration-150 bg-white border border-r-0 border-black-600 focus:shadow-outline hover:bg-blue-100 md:rounded-none rounded-l-lg {{ if not $pag.HasPrev }}pointer-events-none{{ end }}"><a href="{{ if $pag.HasPrev }}{{ $pag.Prev.URL }}{{ end }}">Prev</a></li>
 
-	<li {{ if $pag.HasPrev }}class="text-blue-600"{{ end }}><a href="{{ $pag.First.URL }}">1</a></li>
+	<li class="px-4 py-2 text-black-600 transition-colors duration-150 bg-white border border-r-0 border-black-600 focus:shadow-outline hidden sm:list-item {{ if $pag.HasPrev }}hover:bg-blue-100{{ else }}pointer-events-none bg-blue-300{{ end }}"><a href="{{ $pag.First.URL }}">1</a></li>
 	{{ if gt $first 2 }}
-	<li>...</li>
+	<li class="px-4 py-2 text-black-600 transition-colors duration-150 bg-white border border-r-0 border-black-600 focus:shadow-outline hidden sm:list-item">...</li>
 	{{ end }}
 
 	{{ range $pag.Pagers }}
 	{{ if and (gt .PageNumber 1) (ge .PageNumber $first) (lt .PageNumber $last) (lt .PageNumber $pag.TotalPages) }}
-	<li {{ if ne . $pag }}class="text-blue-600"{{ end }}><a href="{{ .URL }}">{{ .PageNumber }}</a></li>
+	<li class="px-4 py-2 text-black-600 transition-colors duration-150 bg-white border border-r-0 border-black-600 focus:shadow-outline hidden sm:list-item {{ if ne . $pag }}hover:bg-blue-100{{ else }}pointer-events-none bg-blue-300{{ end }}"><a href="{{ .URL }}">{{ .PageNumber }}</a></li>
 	{{ end }}
 	{{ end }}
 
 	{{ if lt $last $pag.TotalPages }}
-	<li>...</li>
+	<li class="px-4 py-2 text-black-600 transition-colors duration-150 bg-white border border-r-0 border-black-600 focus:shadow-outline hidden sm:list-item">...</li>
 	{{ end }}
-	<li {{ if $pag.HasNext }}class="text-blue-600"{{ end }}><a href="{{ $pag.Last.URL }}">{{ $pag.TotalPages }}</a></li>
+	<li class="px-4 py-2 text-black-600 transition-colors duration-150 bg-white border border-r-0 border-black-600 focus:shadow-outline hidden sm:list-item {{ if $pag.HasNext }}hover:bg-blue-100{{ else }}pointer-events-none bg-blue-300{{ end }}"><a href="{{ $pag.Last.URL }}">{{ $pag.TotalPages }}</a></li>
 
-	{{ if $pag.HasNext }}
-	<li class="text-blue-600"><a href="{{ $pag.Next.URL }}">Next &raquo;</a></li>
-	<li class="text-blue-600"><a href="{{ $pag.Last.URL }}">Last &raquo;</a></li>
-	{{ end }}
+	<li class="px-4 py-2 text-black-600 transition-colors duration-150 bg-white border border-r-1 md:border-r-0 border-black-600 focus:shadow-outline md:rounded-none rounded-r-lg {{ if $pag.HasNext }}hover:bg-blue-100{{ else }}pointer-events-none{{ end }}"><a href="{{ if $pag.HasNext }}{{ $pag.Next.URL }}{{ end }}">Next</a></li>
+	<li class="px-4 py-2 text-black-600 transition-colors duration-150 bg-white border border-black-600 rounded-r-lg focus:shadow-outline hover:bg-blue-100 hidden md:list-item {{ if $pag.HasNext }}hover:bg-blue-100{{ else }}pointer-events-none{{ end }}"><a href="{{ $pag.Last.URL }}">Last</a></li>
 	</ul>
+  </nav>
 </div>
