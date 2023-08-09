@@ -912,6 +912,10 @@ code {
   .md\:border-r-0 {
     border-right-width: 0px;
   }
+
+  .md\:text-left {
+    text-align: left;
+  }
 }
 
 @media (min-width: 1024px) {
@@ -929,5 +933,9 @@ code {
 
   .lg\:border-r-0 {
     border-right-width: 0px;
+  }
+
+  .lg\:text-left {
+    text-align: left;
   }
 }
