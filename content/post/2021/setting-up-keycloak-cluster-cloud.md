@@ -40,7 +40,7 @@ GRANT ALL ON keycloak.* TO keycloak@'172.16.0.%' identified by 'keycloak';
 ```
 
 If you don't set the character set and collation, you will run into the following error
-```none
+```plaintext
 Change Set META-INF/jpa-changelog-1.9.1.xml::1.9.1::keycloak failed.  Error: Row size too large. The maximum row size for the used table type, not counting BLOBs, is 65535. This includes storage overhead, check the manual
 ```
 
@@ -97,7 +97,7 @@ Load the MySQL driver.
 ```
 
 Now to define the datasource. Create `datasource.cli`
-```none
+```plaintext
 embed-server --server-config=standalone-ha.xml -c
 
 # Remove old database connection if it exists
@@ -129,7 +129,7 @@ Load the datasource.
 ```
 
 Create `/opt/jboss.properties`. This file will allow us to define variables in standalone-ha.xml. The values below are for keycloak1, substitute keycloak1 with keycloak2 and 172.16.0.2 with 172.16.0.3 for keycloak2.
-```none
+```plaintext
 jboss.server.name=keycloak
 jboss.node.name=keycloak1
 jboss.bind.address=172.16.0.2
@@ -142,7 +142,7 @@ Now lets run keycloak on keycloak1 and keycloak2 independently to see if it star
 ```
 
 If you see the below then you are good to proceed. Otherwise go back and see what is wrong
-```none
+```plaintext
 INFO  [org.jboss.as] (Controller Boot Thread) WFLYSRV0051: Admin console listening on http://127.0.0.1:9990
 ```
 
@@ -159,7 +159,7 @@ Now that we have Keycloak working, it's time to configure clustering. Keycloak u
 
 #### TCPPING
 Create `tcpping.cli`
-```none
+```plaintext
 embed-server --server-config=standalone-ha.xml
 
 if (outcome == success) of /subsystem=jgroups/stack=tcpping:read-resource
@@ -192,13 +192,13 @@ Load the TCPPING configuration.
 ```
 
 Add the line below to `/opt/jboss.properties`
-```none
+```plaintext
 initial.hosts=keycloak1[7600],keycloak2[7600]
 ```
 
 #### DNSPING
 Create `dnsping.cli`
-```none
+```plaintext
 embed-server --server-config=standalone-ha.xml
 
 if (outcome == success) of /subsystem=jgroups/stack=dnsping:read-resource
@@ -235,12 +235,12 @@ Load the DNSPING configuration.
 ```
 
 Add the line below to `/opt/jboss.properties`
-```none
+```plaintext
 dns.query=HOSTNAME
 ```
 
 `HOSTNAME` needs to point to the private IPs of all your Keycloak servers, assuming `keycloak.example.com`
-```none
+```plaintext
 dig keycloak.example.com
 
 ; <<>> DiG 9.16.1-Ubuntu <<>> keycloak.example.com
@@ -268,7 +268,7 @@ You can either set up a public hostname or configure a private DNS server to ser
 
 #### JDBC_PING
 create `jdbcping.cli`
-```none
+```plaintext
 embed-server --server-config=standalone-ha.xml
 
 if (outcome == success) of /subsystem=jgroups/stack=jdbcping:read-resource
@@ -307,7 +307,7 @@ Once you are done with either method above, start Keycloak on both nodes
 ```
 
 Verify that you see the below in the log
-```none
+```plaintext
 INFO  [org.infinispan.CLUSTER] (thread-5,ejb,keycloak1) ISPN000094: Received new cluster view for channel ejb: [keycloak1|1] (2) [keycloak1, keycloak2]
 INFO  [org.infinispan.CLUSTER] (thread-14,ejb,keycloak2) [Context=authenticationSessions] ISPN100010: Finished rebalance with members [keycloak2, keycloak1], topology id 5
 ```
@@ -316,7 +316,7 @@ INFO  [org.infinispan.CLUSTER] (thread-14,ejb,keycloak2) [Context=authentication
 Now that the cluster is up, it's time to set up load balancing. According to the [Keycloak 14.0 Documentation](https://www.keycloak.org/docs/14.0/server_installation/#_clustering), Keycloak uses Inifispan to handle logged in sessions, so for performance reasons it's better to enable [sticky sessions](https://en.wikipedia.org/wiki/Load_balancing_(computing)#Persistence) on the load balancer. One drawback to the default configuration is if one node goes down all sessions handled by that node will be lost.
 
 To solve this we need to increase the number of session owners. Create `session.cli`
-```none
+```plaintext
 embed-server --server-config=standalone-ha.xml
 
 /subsystem=infinispan/cache-container=keycloak/distributed-cache=sessions:write-attribute(name=owners,value=${owner.count:1})
@@ -336,12 +336,12 @@ Load the new session configuration.
 ```
 
 Add the line below to `/opt/jboss.properties`. Note that I kept the default session owner to 1.
-```none
+```plaintext
 owner.count=2
 ```
 
 We also need to configure Keycloak to work behind a reverse proxy. Create `listener.cli`
-```none
+```plaintext
 embed-server --server-config=standalone-ha.xml
 
 /subsystem=undertow/server=default-server/http-listener=default:write-attribute(name=proxy-address-forwarding, value=true)
@@ -360,7 +360,7 @@ apt install haproxy
 ```
 
 Edit `/etc/haproxy/haproxy.cfg`. Check out [this article]({{<relref "letsencrypt-prehooks.md">}}) to see how I set up certificates.
-```none
+```plaintext
 global
     log /dev/log    local0
     log /dev/log    local1 notice

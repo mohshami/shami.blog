@@ -425,7 +425,8 @@ video {
 }
 
 code {
-  background-color:#007f7f;
+  background-color:#eee;
+  font-family: consolas,"Liberation Mono",courier,monospace;
 }
 
 *, ::before, ::after {
@@ -704,10 +705,6 @@ code {
   border-bottom-width: 1px;
 }
 
-.border-l-0 {
-  border-left-width: 0px;
-}
-
 .border-dotted {
   border-style: dotted;
 }
@@ -850,20 +847,6 @@ code {
   .sm\:list-item {
     display: list-item;
   }
-
-  .sm\:rounded-l-lg {
-    border-top-left-radius: 0.5rem;
-    border-bottom-left-radius: 0.5rem;
-  }
-
-  .sm\:rounded-r-lg {
-    border-top-right-radius: 0.5rem;
-    border-bottom-right-radius: 0.5rem;
-  }
-
-  .sm\:text-left {
-    text-align: left;
-  }
 }
 
 @media (min-width: 768px) {
@@ -873,10 +856,6 @@ code {
 
   .md\:flex {
     display: flex;
-  }
-
-  .md\:list-item {
-    display: list-item;
   }
 
   .md\:hidden {
@@ -893,24 +872,6 @@ code {
 
   .md\:grid-cols-4 {
     grid-template-columns: repeat(4, minmax(0, 1fr));
-  }
-
-  .md\:rounded-none {
-    border-radius: 0px;
-  }
-
-  .md\:rounded-l-lg {
-    border-top-left-radius: 0.5rem;
-    border-bottom-left-radius: 0.5rem;
-  }
-
-  .md\:rounded-r-lg {
-    border-top-right-radius: 0.5rem;
-    border-bottom-right-radius: 0.5rem;
-  }
-
-  .md\:border-r-0 {
-    border-right-width: 0px;
   }
 
   .md\:text-left {
@@ -933,9 +894,5 @@ code {
 
   .lg\:border-r-0 {
     border-right-width: 0px;
-  }
-
-  .lg\:text-left {
-    text-align: left;
   }
 }

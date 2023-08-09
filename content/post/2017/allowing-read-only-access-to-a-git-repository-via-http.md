@@ -9,7 +9,7 @@ Today I thought about a way to easily distribute an [Ansible](https://www.ansibl
 
 The easiest solution I have found was using [cgit](https://git.zx2c4.com/cgit/about/). Simply run it with [nginx](https://www.nginx.com) and [fcgiwrap](https://github.com/gnosek/fcgiwrap).<!--more-->
 
-```none
+```plaintext
 server {
     listen                80;
     server_name           git.example.com;
@@ -27,14 +27,14 @@ server {
   }
 ```
 
-```none
+```plaintext
 #/etc/rc.conf
 fcgiwrap_socket_owner=www
 fcgiwrap_user="www"
 fcgiwrap_enable="YES"
 ```
 
-```none
+```plaintext
 #/usr/local/etc/cgitrc
 #
 # cgit config

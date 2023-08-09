@@ -429,10 +429,6 @@ video {
   padding-bottom: 10px;
 }
 
-code {
-  background-color:#007f7f;
-}
-
 *, ::before, ::after {
   --tw-border-spacing-x: 0;
   --tw-border-spacing-y: 0;

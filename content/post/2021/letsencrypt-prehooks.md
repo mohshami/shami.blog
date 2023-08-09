@@ -51,7 +51,7 @@ requestCert "$domainsParam"
 ```
 
 The contents of /root/.lego
-```none
+```plaintext
 EMAIL=foo@bar.com       # Mandatory
 PORT=127.0.0.1:402      # Optional, if not specified the acme challenge is stored in /usr/local/www/.well-known/acme-challenge, if specified, lego will listen on the defined IP and port
 ```
@@ -61,7 +61,7 @@ You will have to configure your web server or load balancer to use either the fo
 Usage: `acmenew domain1 [domain2 domain3 ...]`
 
 This will generate the following set of files in /var/db/lego/certificates/
-```none
+```plaintext
 domain1.crt
 domain1.issuer.crt
 domain1.json

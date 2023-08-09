@@ -1,8 +1,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <!-- <script src="https://cdn.tailwindcss.com"></script> -->
-  {{ $style := resources.Get "style.css" }}    
+  {{ $style := resources.Get "hugo.css" }}    
   <link rel="stylesheet" href="{{ $style.Permalink }}">
 
     {{ $hugo := resources.Get "hugo.css" }}    
@@ -10,4 +9,6 @@
 
     <link rel="stylesheet" href="https://rawcdn.githack.com/nextapps-de/spotlight/0.7.8/dist/css/spotlight.min.css">
     <script src="https://rawcdn.githack.com/nextapps-de/spotlight/0.7.8/dist/js/spotlight.min.js"></script>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.8.0/build/styles/vs2015.min.css">
   </head>

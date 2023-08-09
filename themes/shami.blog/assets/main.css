@@ -18,6 +18,7 @@
     }
 
     code {
-        background-color:#007f7f;
+        background-color:#eee;
+        font-family: consolas,"Liberation Mono",courier,monospace;
     }
 }
