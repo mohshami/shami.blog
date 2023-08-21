@@ -1,5 +1,5 @@
 ---
-title: "Http System Time Update"
+title: "Update system time with HTTP"
 date: 2023-08-21T03:56:10-04:00
 ---
 
