@@ -15,7 +15,7 @@ Certain backends support multiple named workspaces, allowing multiple states to 
 
 Let's take a look at my first attempt to use workspaces (This doesn't include the modules folder):
 
-```none
+```plaintext
 .
 ├── account.tf
 ├── cloudinit.sh
@@ -29,7 +29,7 @@ Let's take a look at my first attempt to use workspaces (This doesn't include th
 └── vpc.tf
 ```
 
-```none
+```plaintext
 terraform {
   backend "s3" {
     bucket = "my-terraform-backend"
@@ -75,7 +75,7 @@ Cons, taken from the workspaces page:
 
 One other minor drawback is the longer command, `common.tfvars` can be renamed to `common.auto.tfvars` and then you will have a single -var-file argument, but still. I'm super lazy when it comes to things like this, so I looked for an alternative. I stumbled across [this](https://medium.com/@smburrows/terraform-workspace-variables-497535bf645e) and this is what I got
 
-```none
+```plaintext
 ├── config.yaml
 ├── main.tf
 └── workspaces

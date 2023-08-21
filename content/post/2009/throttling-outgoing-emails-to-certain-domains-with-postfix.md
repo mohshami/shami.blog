@@ -15,7 +15,7 @@ After some more digging around I found that Postfix 2.5 introduced the perfect s
 
 First, add the following lines to your master.cf
 
-```none
+```plaintext
 domain1      unix  -       -       n       -       -       smtp
         -o smtp_fallback_relay=
 domain2      unix  -       -       n       -       -       smtp
@@ -25,14 +25,14 @@ domain3      unix  -       -       n       -       -       smtp
 ```
 
 Now, to use those transports add these lines to your transport_maps file
-```none
+```plaintext
 domain1.tld    domain1:
 domain2.tld    domain2:
 domain3.tld    domain3:
 ```
 
 Finally, set the destination_rate_delay for those transports in main.cf
-```none
+```plaintext
 domain1_destination_rate_delay = 10s
 domain2_destination_rate_delay = 20s
 domain3_destination_rate_delay = 30s

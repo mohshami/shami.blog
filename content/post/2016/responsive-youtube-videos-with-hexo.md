@@ -15,7 +15,7 @@ While checking my old posts I noticed embedded using the &#123;% youtube %&#125;
 
 To solve this, I changed /node_modules/hexo/lib/plugins/tag/youtube.js and replaced the return line with
 
-```none
+```plaintext
 return '&lt;style&gt;.codegena{position:relative;width:100%;height:0;padding-bottom:56.27198%;}.codegena iframe{position:absolute;top:0;left:0;width:100%;height:100%;}&lt;/style&gt;&lt;div class="codegena"&gt;&lt;iframe width="500" height="294" src="https://www.youtube.com/embed/' + id + '?&autohide=2"frameborder="0"&gt;&lt;/iframe&gt;&lt;/div&gt;';
 ```
 

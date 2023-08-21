@@ -11,7 +11,7 @@ Database error 1064 while doing query You have an error in your SQL syntax; chec
 
 Tracking this problem down I found the following code segment in "admin/send_core.php"
 
-```none
+```plaintext
 if (is_array($_POST["criteria_values"])) {
 $values = join(", ",$_POST["criteria_values"]);
 } else {
@@ -21,7 +21,7 @@ $values = $_POST["criteria_values"];
 
 $values in this segment will always start with a comma. We just need to add a substr statement to fix that. Just change it to
 
-```none
+```plaintext
 if (is_array($_POST["criteria_values"])) {
 $values = join(", ",$_POST["criteria_values"]);
 } else {

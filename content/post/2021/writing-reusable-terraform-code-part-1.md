@@ -11,7 +11,7 @@ All my previous configurations consisted of a single folder with a few .tf files
 
 Lets take a look at a sample directory structure:
 
-```none
+```plaintext
 .
 |-- environments
 |   |-- dev

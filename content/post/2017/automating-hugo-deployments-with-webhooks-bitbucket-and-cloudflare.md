@@ -23,7 +23,7 @@ Recntly my friends at [Tarent](https://www.tarent.de/en/home) introduced me to [
 
 First, the trigger, taken from [the example page](https://github.com/adnanh/webhook/wiki/Hook-Examples)
 
-```none
+```plaintext
 [
   {
     "id": "AWESOME_HOOK",
@@ -88,7 +88,7 @@ $CURL -X DELETE "https://api.cloudflare.com/client/v4/zones/CLOUDFLARE_ZONE_ID/p
 
 Site configuration (Only the part to proxy the requests to Webhook):
 
-```none
+```plaintext
 	#
 	location /hooks/AWESOME_HOOK {
 		# Cloudflare servers

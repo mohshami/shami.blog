@@ -23,7 +23,7 @@ After checking the binary content of the file I noticed the following
 hexdump -x img.jpg | head
 ```
 
-```none
+```plaintext
 Valid JPG file (Some spaces removed to improve appearance)
 0000000  d8ff  e0ff  1000  464a  4649  0100  0001  0100
 0000010  0100  0000  feff  3e00  5243  4145  4f54  3a52
@@ -37,7 +37,7 @@ Valid JPG file (Some spaces removed to improve appearance)
 0000090  3d39  3238  2e3c  3433  ff32  00db  0143  0909
 ```
 
-```none
+```plaintext
 Invalid JPG file  (Some spaces removed to improve appearance)
 0000000  ff0a  ffd8  00e0  4a10  4946  0046  0101  0000
 0000010  0001  0001  ff00  00fe  433e  4552  5441  524f

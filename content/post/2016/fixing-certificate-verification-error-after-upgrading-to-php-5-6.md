@@ -7,7 +7,7 @@ categories:
 
 Since PHP 5.5 reached it's end of life a while back I started upgrading my servers to PHP 5.6. This has caused some issues but the worst was:
 
-```none
+```plaintext
 error:14090086:SSL routines:SSL3_GET_SERVER_CERTIFICATE:certificate verify failed
 ```
 <!--more-->

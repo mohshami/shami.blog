@@ -15,7 +15,7 @@ After some checks and trying to re-install the dejavu font like some forum posts
 ```
 I got the following error
 
-```none
+```plaintext
 (process:78048): Pango-CRITICAL **: No modules found:
 No builtin or dynamically loaded modules were found.
 PangoFc will not work correctly.

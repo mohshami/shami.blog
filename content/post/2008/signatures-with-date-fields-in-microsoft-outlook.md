@@ -9,7 +9,7 @@ Ok, so today our CEO said he wanted everybody to stamp their emails with the sen
 
 Add "$$MYDATE$$" to your signature but without the quotes, then add this simple script to VBA:
 
-```none
+```plaintext
 Private Sub Application_ItemSend(ByVal Item As Object, Cancel As Boolean)
     If Item.Class = olMail Then
         Dim Signature As String

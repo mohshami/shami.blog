@@ -17,7 +17,7 @@ This guide assumes you have 2 hard drives; one for Linux and the other for Windo
 - Save grldr and menu.lst to C:
 - Edit menu.lst and put the following:
 
-```none
+```plaintext
 title Linux
 chainloader (hd1)+1
 rootnoverify (hd1)
@@ -25,7 +25,7 @@ rootnoverify (hd1)
 
 - Edit your boot.ini and add the following line:
 
-```none
+```plaintext
 C:GRLDR="Linux"
 ```
 

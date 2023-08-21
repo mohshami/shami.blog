@@ -51,13 +51,13 @@ chown vmail:vmail /var/vmail
 ```
 
 Configuration:
-```none
+```plaintext
 # rc.conf
 dovecot_enable="YES"
 ```
 
 Configure Dovecot:
-```none
+```plaintext
 # dovecot.conf
 #We'll be starting with IMAP only, add other protocols when you get your system to start
 protocols = imap
@@ -92,7 +92,7 @@ valid_chroot_dirs = /var/vmail
 ```
 
 Set up the LDAP backend:
-```none
+```plaintext
 cp /usr/ports/mail/dovecot/work/dovecot-1.0.10/doc/dovecot-ldap-example.conf /usr/local/etc/dovecot-ldap.conf
 vi dovecot-ldap.conf
 
@@ -147,7 +147,7 @@ make install
 Make sure you choose DOVECOT and OPENLDAP. Also choose any other options you need. No need for any Kerberos options. You can use the default options during the make install operation.
 
 Disable sendmail and enable Postfix:
-```none
+```plaintext
 # /etc/rc.conf
 postfix_enable="YES"
 sendmail_enable="NO"
@@ -167,7 +167,7 @@ Fix the Postfix maps
 postalias /etc/aliases```
 
 Reboot the system for all settings to take effect, then test:
-```none
+```plaintext
 telnet localhost 25
 Trying 127.0.0.1...
 Connected to localhost.
@@ -178,7 +178,7 @@ quit
 ```
 
 Now that Postfix is running, lets hook it up to Active Directory (This is the complete file):
-```none
+```plaintext
 myhostname=mailhost
 mydestination=localhost
 mynetworks=127.0.0.1
@@ -215,7 +215,7 @@ ldapvirtual_result_format=%s/
 ```
 
 Lets test:
-```none
+```plaintext
 telnet localhost 25
 Trying 127.0.0.1...
 Connected to localhost.
@@ -242,7 +242,7 @@ If all goes well, Postfix will deliver the message to /var/vmail/mshami/
 Using the Dovecot LDA:
 Normally the virtual delivery agent is enough, but if you want to apply quota or vacation auto reply you're going to have to use the Dovecot LDA. Also, the Dovecot LDA updates the mailbox indexes which will give you better IMAP/POP3 performance
 
-```none
+```plaintext
 
 # /usr/local/etc/postfix/master.cf
 dovecot   unix  -       n       n       -       -       pipe
@@ -264,7 +264,7 @@ dovecot_destination_recipient_limit=1
 ```
 
 Test again:
-```none
+```plaintext
 telnet localhost 25
 Trying 127.0.0.1...
 Connected to localhost.
@@ -287,12 +287,12 @@ Connection closed by foreign host.
 ```
 
 Now check your logs, you should see something like this:
-```none
+```plaintext
 postfix/pipe[904]: 9DBBF1143B: to=, relay=dovecot, delay=6.9, delays=6.4/0.01/0/0.56, dsn=2.0.0, status=sent (delivered via dovecot service)
 ```
 
 Great, now we're ready to enable SMTP authentication:
-```none
+```plaintext
 vi /usr/local/etc/postfix/main.cf
 smtpd_sasl_auth_enable = yes
 broken_sasl_auth_clients = yes
@@ -309,7 +309,7 @@ vi /usr/local/etc/dovecot.conf
 ```
 
 Testing:
-```none
+```plaintext
 telnet localhost 25
 Trying 127.0.0.1...
 Connected to localhost.

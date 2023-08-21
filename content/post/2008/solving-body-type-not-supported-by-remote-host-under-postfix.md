@@ -11,7 +11,7 @@ This happens when a mail server -*Usually Microsoft Exchange*- announces it has 
 
 If you're using Postfix 2.3 or higher this can be easily fixed as follows:
 
-```none
+```plaintext
 # main.cf:
 smtp_discard_ehlo_keyword_maps = hash:/etc/postfix/mta_workarounds
 mta_workarounds:
@@ -24,7 +24,7 @@ This solution is too crude for my taste, I mean why would you want to dump up Po
 
 What you want to do here is dump up Postfix only when it talks to this recipient, here is how:
 
-```none
+```plaintext
 master.cf:
 brokensmtp      unix  -       -       n       -       -       smtp
     -o smtp_never_send_ehlo=yes

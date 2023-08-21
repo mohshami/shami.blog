@@ -61,7 +61,7 @@ webhook.json:
 Note: I'm using `CF-Connecting-IP` above because the site runs behind CloudFlare. You can use X-Forwarded-For if requests go directly to your server.
 
 nginx site configuration:
-```none
+```plaintext
 # Basic nginx configuration for a static site plus a reverse proxy
 server {
         listen 80;

@@ -24,7 +24,7 @@ Download Instant Client drivers:
 
 Download the files below from [Oracle](http://www.oracle.com/technetwork/database/features/instant-client/index-097480.html)
 
-```none
+```plaintext
 instantclient-basic-linuxAMD64-10.1.0.5.0-20060519.zip
 instantclient-sdk-linuxAMD64-10.1.0.5.0-20060519.zip
 instantclient-sqlplus-linuxAMD64-10.1.0.5.0-20060519.zip
@@ -94,7 +94,7 @@ mkdir -p /opt/oracle/instantclient/network/admin
 
 Contents:
 
-```none
+```plaintext
 # /opt/oracle/instantclient/network/admin/tnsnames.ora
 MYDATABASE=
  (description=
@@ -115,7 +115,7 @@ sqlplus USER/PASSDWORD@MYDATABASE
 
 This is what you should see if everything was successful:
 
-```none
+```plaintext
 SQL*Plus: Release 10.1.0.5.0 - Production on Mon Apr 24 05:05:49 2017
 
 Copyright (c) 1982, 2005, Oracle.  All rights reserved.
@@ -143,7 +143,7 @@ pecl install oci8
 
 Answer with the following:
 
-```none
+```plaintext
 Client [autodetect] : instantclient,/opt/oracle/instantclient
 ```
 
@@ -161,7 +161,7 @@ ln -s /etc/php/7.0/mods-available/oci8.ini /etc/php/7.0/cli/conf.d/
 
 Check if the module was indeed enabled
 
-```none
+```plaintext
 php -m
 [PHP Modules]
 calendar

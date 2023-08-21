@@ -10,7 +10,7 @@ First thing's first. I maintain my own repo using [Poudriere](https://github.com
 We'll be using FreeBSD 11.1. Also, we'll be using jails to keep any security issues with PHP from affecting the whole server. We'll use NAT to provide internet access to the jails.
 
 Add a private network to the server, this will be used for communication between the jails and the host
-```none
+```plaintext
 # /etc/rc.conf
 cloned_interfaces="lo1"
 ipv4_addrs_lo1="192.168.0.1/24"
@@ -20,7 +20,7 @@ iocage_enable="YES"
 ```
 
 Configure pf to NAT
-```none
+```plaintext
 # /etc/pf.conf
 ext_if="MAIN_INTERFACE"
 jail_if="lo1"
@@ -81,7 +81,7 @@ mkdir -p /iocage/jails/php44/root/usr/local/www/example.com
 
 Set up the jails to mount the webroot
 
-```none
+```plaintext
 # /iocage/jails/php52/fstab
 /usr/local/www/example.com /iocage/jails/php52/root/usr/local/www/example.com nullfs rw 0 0
 
@@ -90,7 +90,7 @@ Set up the jails to mount the webroot
 ```
 
 Nginx backend configuration
-```none
+```plaintext
 upstream php52 {
 	least_conn;
 	server 192.168.0.2:9000 max_fails=0;

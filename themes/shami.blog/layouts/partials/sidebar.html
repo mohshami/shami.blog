@@ -18,7 +18,9 @@
   <div class="px-8 py-5 bg-white m-3 rounded-lg">
     <p class="text-xl">Recent Posts</p>
 <ul>
-<li class="border-b border-dotted border-slate-400">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem</li>
+{{- range ( where site.RegularPages "Section" "post" | first 5 ) }}
+<li class="border-b border-dotted border-slate-400 mb-2 truncate ..."><a href="{{ .Permalink }}" title="{{ .Title }}">{{ .Title }}</a></li>
+{{ end }}
 </ul>
   </div>
 </div>

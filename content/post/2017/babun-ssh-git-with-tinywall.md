@@ -5,7 +5,7 @@ title: "Babun SSH/Git With TinyWall"
 
 I was thinking of a way to make my laptop a bit more secure and started looking into alternative firewalls for Windows. I came across [TinyWall](https://tinywall.pados.hu/) which is an alternative front end to the Windows firewall so it's not as intrusive as the other options. Everything was working well till I tried to pull a git repository from [Babun](http://babun.github.io/) and I got an the following error<!--more-->
 
-```none
+```plaintext
 ssh: connect to host bitbucket.org port 22: Network is unreachable
 ```
 

@@ -15,13 +15,13 @@ sudo vi /etc/default/grub
 
 then find
 
-```none
+```plaintext
 GRUB_CMDLINE_LINUX_DEFAULT="quiet splash"
 ```
 
  and replace it with
 
-```none
+```plaintext
 GRUB_CMDLINE_LINUX_DEFAULT="ipv6.disable=1 quiet splash"
 ```
 
@@ -39,7 +39,7 @@ vi ~/.bashrc
 
 and add
 
-```none
+```plaintext
 MOZ_DISABLE_PANGO=1
 ```
 

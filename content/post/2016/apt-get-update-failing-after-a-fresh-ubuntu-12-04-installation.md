@@ -7,7 +7,7 @@ categories:
 
 So I'm currently working with a customer that requires Ubuntu 12.04 for their servers since their apps were built and tested on that version, so every new install I run into the following issue<!--more-->
 
-```none
+```plaintext
 W: Failed to fetch bzip2:/var/lib/apt/lists/partial/jo.archive.ubuntu.com_ubuntu_dists_precise_main_binary-i386_Packages  Hash Sum mismatch
 ```
 

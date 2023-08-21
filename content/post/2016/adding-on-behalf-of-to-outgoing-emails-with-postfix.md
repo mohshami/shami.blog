@@ -13,18 +13,18 @@ This was convenient because destination mail servers would check Mandrill's SPF 
 And then [MailChimp decided to change their business model](http://blog.mailchimp.com/important-changes-to-mandrill/) and Mandrill was no longer an option. I thought about checking other services like [SparkPost](https://www.sparkpost.com/pricing) or [MailGun](https://www.mailgun.com/) but then decided on building my own. You never know when they'd decide to do what MailChimp did.
 
 Just add the following lines to main.cf (Those paths are for FreeBSD, your paths might vary)
-```none
+```plaintext
 sender_canonical_maps = regexp:/usr/local/etc/postfix/canonical
 sender_canonical_classes = envelope_sender
 header_checks = regexp:/usr/local/etc/postfix/my_custom_header
 ```
 
-```none
+```plaintext
 # /usr/local/etc/postfix/canonical
 /.*/ user@DOMAIN.TLD
 ```
 
-```none
+```plaintext
 # /usr/local/etc/postfix/my_custom_header
 /^Subject:/i PREPEND Sender: user@DOMAIN.TLD
 ```

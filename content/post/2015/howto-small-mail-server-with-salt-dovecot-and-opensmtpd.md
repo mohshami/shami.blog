@@ -152,7 +152,7 @@ dovecot:
 ```
 
 mailsrv/conf/dovecot/dovecot.conf:
-```none
+```plaintext
 protocols = imap pop3 lmtp
 
 log_path = /var/log/dovecot.log
@@ -197,7 +197,7 @@ namespace {
 ```
 
 mailsrv/conf/dovecot/dovecot-passwd:
-```none
+```plaintext
 {% raw %}{% set passwordSalt = salt['pillar.get']('salt') %}
 {%- for account in salt['pillar.get']('accounts') -%}
 {{ account[0] }}:{SHA512-CRYPT}{{ salt['password.hash'](account[1], passwordSalt) }}
@@ -263,7 +263,7 @@ smtpd:
 Use relay instead of deliver because OpenSMTPD requires a local user account to deliver, this way we can use virtual accounts with Dovecot 
 
 mailsrv/conf/opensmtpd/smtpd.conf:
-```none
+```plaintext
 #PKI file locations
 pki mailsrv.example.com certificate "/usr/local/etc/mail/cert/cert"
 pki mailsrv.example.com key "/usr/local/etc/mail/cert/key"
@@ -304,7 +304,7 @@ For passwd, I had to write it this way because openSMTPD at the time of writing 
 **Update:** Gilles is looking into this
 
 mailsrv/conf/opensmtpd/passwd:
-```none
+```plaintext
 {% raw %}{% set passwordSalt = salt['pillar.get']('salt') %}
 {%- set accounts = salt['pillar.get']('accounts') %}
 {%- for account in accounts[:-1] -%}
@@ -319,14 +319,14 @@ mailsrv/conf/opensmtpd/passwd:
 ```
 
 mailsrv/conf/opensmtpd/recipients:
-```none
+```plaintext
 {% raw %}{% for account in salt['pillar.get']('accounts') -%}
 {{ account[0] }}
 {% endfor -%}{% endraw %}
 ```
 
 mailsrv/conf/opensmtpd/vdomains:
-```none
+```plaintext
 {% raw %}{% for domain in salt['pillar.get']('domains') -%}
 {{ domain }}
 {% endfor -%}{% endraw %}
@@ -366,7 +366,7 @@ dkimproxy_out:
 ```
 
 mailsrv/genkeys.sls:
-```none
+```plaintext
 {% raw %}{% for domain in salt['pillar.get']('domains') %}
 
 {% set keys = salt['dkim.generate']() %}
@@ -406,7 +406,7 @@ mailsrv/genkeys.sls:
 ```
 
 mailsrv/conf/dkimproxy_out.conf:
-```none
+```plaintext
 # specify what address/port DKIMproxy should listen on
 listen    127.0.0.1:10027
 
@@ -425,7 +425,7 @@ min_spare_servers 5
 ```
 
 mailsrv/conf/dkimproxy/keyfiles:
-```none
+```plaintext
 {% raw %}{% set domains = salt['pillar.get']('domains') %}
 {%- for domain in domains[:-1] -%}
 {{ domain }} dkim(c=relaxed/simple, a=rsa-sha256,s=mailsrv,key=/usr/local/etc/dkimproxy/{{ domain }}/private)
@@ -433,7 +433,7 @@ mailsrv/conf/dkimproxy/keyfiles:
 ```
 
 mailsrv/conf/dkimproxy/domain/public:
-```none
+```plaintext
 {% raw %}mailsrv._domainkey	IN	TXT	( "v=DKIM1; k=rsa; t=s; "
 	  "p= {{ keys[1] }}" )  ; ----- DKIM key mailsrv for {{ domain }}{% endraw %}
 ```
@@ -447,7 +447,7 @@ salt 'mailsrv' state.highstate
 ```
 
 Just a note, when the first client authenticates with OpenSMTPD after a restart, the log file will show the following error
-```none
+```plaintext
 Authentication temporarily failed for user user@domain```
 
 That's OK, it will switch to the virtual user file afterwards. Not sure if this is a bug or a feature

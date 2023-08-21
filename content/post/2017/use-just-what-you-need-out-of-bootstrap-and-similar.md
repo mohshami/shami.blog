@@ -57,7 +57,7 @@ Concatenate and minify javascript files:
 
 Using Prepros, create a new .js file and put the following content
 
-```none
+```plaintext
 //@prepros-append lazyload.transpiled.min.js
 //@prepros-append lightbox.js
 //@prepros-append prism.js

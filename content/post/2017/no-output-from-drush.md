@@ -9,7 +9,7 @@ A while back [Drush](https://github.com/drush-ops/drush) stopped working on my s
 
 After digging around I found the [following post](http://stackoverflow.com/questions/19925526/using-cli-to-use-phar-file-not-working) which says that [Suhosin](https://suhosin.org/stories/index.html) blocks Phar file execution. The fix turned out to be quite simple; Just edit the Suhosin ini file (in FreeBSD it's /usr/local/etc/php/ext-30-suhosin.ini) and add the following after the "extension" line:
 
-```none
+```plaintext
 suhosin.executor.include.whitelist = phar
 ```
 

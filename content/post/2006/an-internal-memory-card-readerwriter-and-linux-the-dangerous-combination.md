@@ -21,7 +21,7 @@ A quick search in the Gentoo Forums (I told you you're gonna love this Kilo) tol
 So I go ahead and recompile, but it still didn't work :/, again I do some searches in the forum and then google, and then I found it.
 
 You need to enable the following options (Choose whichever applies for your USB support):
-```none
+```plaintext
 Device Drivers——–>
 SCSI Device Support ———>
 legacy /proc/scsi/ support
@@ -38,7 +38,7 @@ USB Support ————–&gt;
 
 Ok, still, the device didn't show up in either lspci and nothing in /proc/scsi, but when I insert a card in the slot, the device /dev/sdd1 will act as that card, adding the following to fstab will enable regular users to mount it:
 
-```none
+```plaintext
 /dev/sdd1 /mnt/ms vfat noauto,user,sync,rw,utf8 0 0
 ```
 

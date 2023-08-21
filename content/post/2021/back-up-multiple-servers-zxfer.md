@@ -38,7 +38,7 @@ done
 
 The format for `snapshots.conf` would be
 
-```none
+```plaintext
 192.168.0.1,zroot/www,dataset1
 # Comments are allowed
 192.168.0.2,zroot/www,parent_dataset/dataset2 # Comments allowed here as well

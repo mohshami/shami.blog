@@ -30,7 +30,7 @@ For the purpose of this HOWTO, I will be using the domain `shami.ovh` and the Wi
 1. Download the binary from [here](https://github.com/go-acme/lego/releases)
 1. Run the code below
 
-```none
+```plaintext
 SET CLOUDFLARE_EMAIL=foo@bar.com
 SET CF_DNS_API_TOKEN=b9841238feb177a84330febba8a83208921177bffe733
 lego -a --dns cloudflare --domains *.dev.shami.ovh --email me@bar.com run

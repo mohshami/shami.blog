@@ -15,7 +15,7 @@ chown USERNAME:USERNAME /path/to/chroot/folder/USERNAME
 ```
 
 Now add the following at the end of your sshd_config
-```none
+```plaintext
 Match User USERNAME
     ChrootDirectory /path/to/chroot/folder
     X11Forwarding no

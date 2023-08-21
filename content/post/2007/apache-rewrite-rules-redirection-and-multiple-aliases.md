@@ -9,7 +9,7 @@ One of our clients has a website that you can go to using multiple URLs. The ser
 
 In apache httpd, here is the fix to this to your virtual host:
 
-```none
+```plaintext
 RewriteCond %{REQUEST_URI} ^/$ [NC]
 RewriteRule "^/$" "Path/To/Folder" [R]
 ```

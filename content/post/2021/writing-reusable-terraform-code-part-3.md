@@ -9,7 +9,7 @@ When your infrastructure becomes more complex, you will usually have a group of 
 
 This is how a repository would normally look like:
 
-```none
+```plaintext
 .
 ├── conf1
 ├──── environments
@@ -46,7 +46,7 @@ This is where [partial backend configuration](https://www.terraform.io/docs/lang
 
 So instead of the above we would have the following:
 
-```none
+```plaintext
 .
 ├── conf1
 ├──── environments
@@ -72,7 +72,7 @@ So instead of the above we would have the following:
 
 account.tf would look something like:
 
-```none
+```plaintext
 provider "aws" {
   region                  = "ca-central-1"
   shared_credentials_file = "/home/USER/.aws/credentials"
@@ -88,7 +88,7 @@ terraform {
 
 Environment files would look like:
 
-```none
+```plaintext
 dev.conf:
 bucket = "dev-bucket"
 
@@ -119,7 +119,7 @@ This way, all common variables are stored in common.auto.tfvars which is automat
 
 We could also use YAML files like in [part 2]({{<relref "writing-reusable-terraform-code-part-2.md">}})
 
-```none
+```plaintext
 locals {
     environment_path = "./environments/${var.environment}.yaml" 
     defaults       = file("${path.module}/config.yaml")

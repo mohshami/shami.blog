@@ -10,7 +10,7 @@ Sometimes when you have a high number of outgoing messages services like Yahoo! 
 Enters [Postfix](http://postfix.org) version 3. It introduced a new [randmap](http://www.postfix.org/DATABASE_README.html#types) table which made this much easier to accomplish.
 
 In main.cf, just add the following lines
-```none
+```plaintext
 sender_dependent_default_transport_maps = 
   randmap:{relay1,relay2,relay3,relay4,relay5}
 smtp_connection_cache_on_demand=no
@@ -22,7 +22,7 @@ Those lines have 2 effects:
 * Prevent the SMTP clients from caching connections, so sending multiple emails to a single domain does not end up using the same SMTP client.
 
 In master.cf, just add new SMTP services and configure them to bind the designated IPs
-```none
+```plaintext
 relay1     unix  -       -       n       -       -       smtp
   -o smtp_bind_address=IP1
   -o smtp_helo_name=foo1.bar.com

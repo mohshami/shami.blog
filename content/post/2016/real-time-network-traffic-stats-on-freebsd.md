@@ -7,6 +7,6 @@ categories:
 
 Quick one here, to get real-time traffic stats on FreeBSD just run the following command
 
-```none
+```plaintext
 systat -ifstat
 ```

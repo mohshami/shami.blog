@@ -66,7 +66,7 @@ That will generate the required certificates. Now edit `/var/lib/acme/conf/targe
 
 Once that's done, you can run your Ansible playbook to generate the nginx configuration and since you already have a certificate ready, there is no need to change any configuration. All you need to do is point to the certificates as below:
 
-```none
+```plaintext
 # nginx
 ssl_certificate     /var/lib/acme/live/example.com/fullchain;
 ssl_certificate_key /var/lib/acme/live/example.com/privkey;

@@ -11,7 +11,7 @@ I used to keep my PC on at all times so I only needed to press that button every
 
 I found a fix for it [here](http://www.linuxquestions.org/questions/linuxanswers-discussion-27/discussion-microsoft-keyboard-function-key-fix-248618/) and thought I should share
 
-```none
+```plaintext
 vi /usr/local/bin/f_lock_fix
 setkeycodes bb 59 # Help  -> F1
 setkeycodes 88 60 # Undo  -> F2

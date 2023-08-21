@@ -9,7 +9,7 @@ So while I was writing my previous post I realized that Google Analytics was bei
 
 I hard-coded the Disqus URL in my theme (Both Hexo and Hugo) but then realized I can't do the same for Google Analytics. I needed a way to disable it altogether. The [fix](https://discuss.gohugo.io/t/how-to-check-if-the-site-is-on-localhost/1490/5) turned out to be quite simple.<!--more-->
 
-```none
+```plaintext
 {{ if ne (printf "%v" $.Site.BaseURL) "http://localhost:1313/" }}
 {{ template "_internal/google_analytics_async.html" . }}
 {{ end }}
@@ -19,7 +19,7 @@ It works for both Google Analytics and Disqus. It should apply to other cases as
 
 Another [approach](https://discuss.gohugo.io/t/how-to-check-if-the-site-is-on-localhost/1490/14) also mentioned on the page is to use two configuration files, one for testing and one for production, and make the testing file the default.
 
-```none
+```plaintext
 // config-release.toml
 BaseURL  = "http://mydomain.com/"
 PublishDir = "/var/www/mysite"
@@ -39,7 +39,7 @@ BaseURL   = http://localhost:1313/
 
 And use hugo switches to choose when to write the production files
 
-```none
+```plaintext
 // to release
 hugo --config ./config-release.toml
 
@@ -52,7 +52,7 @@ The first approach is enough for simple sites, but you might need to use the sec
 **Update: 1/3/2018**
 As I am learning more about the ever evolving Hugo, I found I can just use the below in a partial
 
-```none
+```plaintext
 {{- if in (string .Site.BaseURL) "localhost" -}}
     some dev code, like logging
 {{- else -}}
