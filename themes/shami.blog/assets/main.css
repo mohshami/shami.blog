@@ -21,4 +21,9 @@
         background-color:#eee;
         font-family: consolas,"Liberation Mono",courier,monospace;
     }
+    
+    ul, ol {
+        list-style: revert;
+        margin-left: 1rem;
+    }
 }
