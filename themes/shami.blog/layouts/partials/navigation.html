@@ -3,7 +3,7 @@
 {{ $last := add $pag.PageNumber 2 }}
 <div class="bg-white p-4 flex items-center flex-wrap justify-center">
   <nav aria-label="Page navigation">
-	<ul class="inline-flex">
+	<ul class="list-none inline-flex">
 	<li class="px-4 py-2 text-black-600 transition-colors duration-150 bg-white border border-r-0 border-black-600 rounded-l-lg focus:shadow-outline hover:bg-blue-100 hidden lg:list-item {{ if $pag.HasPrev }}hover:bg-blue-100{{ else }}pointer-events-none{{ end }}"><a href="{{ $pag.First.URL }}">First</a></li>
 	<li class="px-4 py-2 text-black-600 transition-colors duration-150 bg-white border border-r-0 border-black-600 focus:shadow-outline hover:bg-blue-100 lg:rounded-none rounded-l-lg {{ if not $pag.HasPrev }}pointer-events-none{{ end }}"><a href="{{ if $pag.HasPrev }}{{ $pag.Prev.URL }}{{ end }}">Prev</a></li>
 
