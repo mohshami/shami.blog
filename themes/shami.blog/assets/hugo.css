@@ -617,6 +617,11 @@ ul, ol {
   margin-right: auto;
 }
 
+.mx-0 {
+  margin-left: 0px;
+  margin-right: 0px;
+}
+
 .mb-auto {
   margin-bottom: auto;
 }
@@ -631,6 +636,10 @@ ul, ol {
 
 .mb-2 {
   margin-bottom: 0.5rem;
+}
+
+.ml-0 {
+  margin-left: 0px;
 }
 
 .block {
