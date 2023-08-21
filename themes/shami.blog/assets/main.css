@@ -27,3 +27,9 @@
         margin-left: 1rem;
     }
 }
+
+@layer components {
+  .btn-paginate {
+    @apply px-4 py-2 transition-colors duration-150 bg-white border;
+  }
+}
