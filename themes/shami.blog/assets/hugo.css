@@ -434,6 +434,10 @@ ul, ol {
   margin-left: 1rem;
 }
 
+.article a {
+  color: #0074d9
+}
+
 *, ::before, ::after {
   --tw-border-spacing-x: 0;
   --tw-border-spacing-y: 0;
@@ -617,25 +621,20 @@ ul, ol {
   margin-right: auto;
 }
 
-.mx-0 {
-  margin-left: 0px;
-  margin-right: 0px;
-}
-
 .mb-auto {
   margin-bottom: auto;
 }
 
-.-mb-2 {
-  margin-bottom: -0.5rem;
+.mb-2 {
+  margin-bottom: 0.5rem;
 }
 
 .mt-2 {
   margin-top: 0.5rem;
 }
 
-.mb-2 {
-  margin-bottom: 0.5rem;
+.-mb-2 {
+  margin-bottom: -0.5rem;
 }
 
 .ml-0 {

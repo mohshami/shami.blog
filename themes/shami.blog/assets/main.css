@@ -26,6 +26,10 @@
         list-style: revert;
         margin-left: 1rem;
     }
+
+    .article a {
+        color: #0074d9
+    }
 }
 
 @layer components {
