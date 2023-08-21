@@ -11,4 +11,9 @@
     <script src="https://rawcdn.githack.com/nextapps-de/spotlight/0.7.8/dist/js/spotlight.min.js"></script>
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.8.0/build/styles/vs2015.min.css">
+
+   	{{- if in (string .Site.BaseURL) "localhost" -}}
+    {{ template "_internal/google_analytics.html" . }}
+    {{ template "_internal/google_analytics_async.html" . }}
+	{{ end }}
   </head>

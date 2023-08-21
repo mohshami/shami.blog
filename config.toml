@@ -2,7 +2,8 @@ baseURL = 'https://shami.blog/'
 languageCode = 'en-us'
 title = "Shami's Blog"
 theme = 'shami.blog'
-Paginate= 10
+Paginate = 10
+googleAnalytics = "UA-34104225-1"
 
 [params]
 author = "Mohammad H. AlShami"
@@ -10,20 +11,3 @@ author = "Mohammad H. AlShami"
 [permalinks]
 post = "/:year/:month/:title/"
 
-# [markup.goldmark.renderer]
-# unsafe = true
-#
-# [markup.highlight]
-#   anchorLineNos = false
-#   codeFences = true
-#   guessSyntax = true
-#   hl_Lines = ''
-#   hl_inline = false
-#   lineAnchors = ''
-#   lineNoStart = 1
-#   lineNos = true
-#   lineNumbersInTable = false
-#   noClasses = false
-#   noHl = false
-#   style = 'rtt'
-#   tabWidth = 4
