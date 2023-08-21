@@ -1,4 +1,6 @@
-baseURL = 'https://shami.blog/'
+# baseURL = 'https://shami.blog/'
+baseurl = "/"
+
 languageCode = 'en-us'
 title = "Shami's Blog"
 theme = 'shami.blog'
