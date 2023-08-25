@@ -12,7 +12,11 @@
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.8.0/build/styles/vs2015.min.css">
 
-   	{{- if in (string .Site.BaseURL) "localhost" -}}
+    {{ range .AlternativeOutputFormats -}}
+    {{ printf `<link rel="%s" type="%s" href="%s" title="%s" />` .Rel .MediaType.Type .Permalink $.Site.Title | safeHTML }}
+    {{ end -}}
+
+   	{{- if in (string .Site.BaseURL) "shami.blog" -}}
     {{ template "_internal/google_analytics.html" . }}
     {{ template "_internal/google_analytics_async.html" . }}
 	{{ end }}
