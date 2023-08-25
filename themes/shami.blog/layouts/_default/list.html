@@ -4,14 +4,12 @@
 <div class="px-8 py-5 bg-white m-3 rounded-lg">
   <p class="text-3xl font-semibold text-center -mb-2"><a href="{{ .Permalink }}">{{ .Title }}</a></p>
   <p class="text-sm text-center">{{ .Date.Format "2006-01-02" }}</p>
-  <div class="article">
   {{ if .Truncated }}
   {{ .Summary }}
   <p class="text-blue-600 mt-2"><a href="{{ .Permalink }}">Read More...</a></p>
   {{ else }}
   <p class="article">{{ .Content }}</p>
   {{ end }}
-  </div>
 </div>
 {{ end }}
 <div class="px-8 py-5 bg-white m-3">
