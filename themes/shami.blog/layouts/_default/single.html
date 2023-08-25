@@ -1,7 +1,7 @@
 {{ define "main" }}
-<div class="article px-8 py-5 bg-white m-3 rounded-lg">
-  <p class="text-3xl font-semibold text-center">{{ .Title }}</p>
-  <p class="text-sm -mb-2 text-center pb-2">{{ .Date.Format "2006-01-02" }}</p>
-    <div class="article"><p>{{ .Content }}</p></div>
+<div class="px-8 py-5 bg-white m-3 rounded-lg">
+  <p class="text-3xl font-semibold text-center -mb-2">{{ .Title }}</p>
+  <p class="text-sm text-center">{{ .Date.Format "2006-01-02" }}</p>
+    <div class="article">{{ .Content }}</div>
 </div>
 {{ end }}
