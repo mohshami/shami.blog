@@ -12,5 +12,5 @@ enableRobotsTXT = true
 author = "Mohammad H. AlShami"
 
 [permalinks]
-post = "/:year/:month/:title/"
+post = "/:year/:month/:title"
 
