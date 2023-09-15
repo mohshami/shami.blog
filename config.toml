@@ -5,7 +5,6 @@ languageCode = 'en-us'
 title = "Shami's Blog"
 theme = 'shami.blog'
 Paginate = 10
-googleAnalytics = "UA-34104225-1"
 enableRobotsTXT = true
 
 [params]
