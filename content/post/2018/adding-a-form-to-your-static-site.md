@@ -7,7 +7,7 @@ I've become a big fan of [static site generators](https://www.staticgen.com/) la
 
 When I try to explain static sites to people, the first thing they argue against is the lack of interactivity, like form handling. I helped my brother build a website last year and chose to go with [Grav](https://getgrav.org/) for that reason alone. Grav is great but my brother couldn't keep it updated because of the lack of Grav consultants as opposed to WordPress or Drupal. I liked Grav because it didn't use a database and for a small site as my brother's, it seemed better to go with a simpler CMS than something like the big boys.
 
-A while back I got introduced to the wonderful world of [Go](https://golang.org/) and instantly got hooked. One of the great resources I found was [Awesome Go](https://www.awesome-go.com/). In a [pervious article](https://shami.blog/2017/09/automating-hugo-deployments-with-webhooks-butbucket-and-cloudflare/) I mentioned how I use [Webhook](https://github.com/adnanh/webhook) to automate the deployment of this blog. This post builds on it.
+A while back I got introduced to the wonderful world of [Go](https://golang.org/) and instantly got hooked. One of the great resources I found was [Awesome Go](https://www.awesome-go.com/). In a [pervious article]({{< ref "/post/2017/automating-hugo-deployments-with-webhooks-bitbucket-and-cloudflare.md" >}}) I mentioned how I use [Webhook](https://github.com/adnanh/webhook) to automate the deployment of this blog. This post builds on it.
 
 For this example, we'll be using the contact form from my brother's website, it is a simple form with Google reCaptcha. With no further ado, lets begin.
 
