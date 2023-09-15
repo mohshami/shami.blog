@@ -1,5 +1,6 @@
 <head>
   <title>{{ if .IsHome }}{{ .Title }}{{ else }}{{ .Title }} &#x7c; {{ .Site.Title }}{{ end }}</title>
+  <meta charset="UTF-8">
 
 {{ if .IsHome }}	<meta property="og:title" content="{{ .Site.Title }}" />
 	<meta name="description" content="Sysadmin, Because Even Developers Need Heroes">
@@ -13,7 +14,6 @@
 	<meta property="og:type" content="article">
 {{ end }}
 
-  <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <meta name="twitter:title" content="Shami&#39;s Blog" />
