@@ -2,13 +2,13 @@
   <title>{{ if .IsHome }}{{ .Title }}{{ else }}{{ .Title }} &#x7c; {{ .Site.Title }}{{ end }}</title>
 
 {{ if .IsHome }}	<meta property="og:title" content="{{ .Site.Title }}" />
-	<meta property="description" content="Sysadmin, Because Even Developers Need Heroes">
+	<meta name="description" content="Sysadmin, Because Even Developers Need Heroes">
 	<meta property="og:description" content="Sysadmin, Because Even Developers Need Heroes">
 	<meta property="og:image" content="https://shami.blog/profile.jpg">
 	<meta property="og:type" content="website">
 {{ else }}	<meta property="og:title" content="{{ .Title }}" />
-	{{ if $.Page.Params.description }}{{ else }}<meta property="description" content="{{ .Summary }}">{{ end }}
-	{{ if $.Page.Params.description }}{{ else }}<meta property="og:description" content="{{ .Summary }}">{{ end }}
+	{{ if $.Page.Params.description }}<meta name="description" content="{{ .Summary }}">{{ else }}<meta name="description" content="{{ .Summary }}">{{ end }}
+	{{ if $.Page.Params.description }}<meta property="og:description" content="{{ .Summary }}">{{ else }}<meta property="og:description" content="{{ .Summary }}">{{ end }}
 	<meta property="og:image" content="https://shami.blog/profile.jpg">
 	<meta property="og:type" content="article">
 {{ end }}
