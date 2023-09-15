@@ -2,12 +2,12 @@
   <title>{{ if .IsHome }}{{ .Title }}{{ else }}{{ .Title }} &#x7c; {{ .Site.Title }}{{ end }}</title>
   <meta charset="UTF-8">
 
-{{ if .IsHome }}	<meta property="og:title" content="{{ .Site.Title }}" />
+{{ if .IsHome }}	<meta property="og:title" content="{{ .Site.Title }}">
 	<meta name="description" content="Sysadmin, Because Even Developers Need Heroes">
 	<meta property="og:description" content="Sysadmin, Because Even Developers Need Heroes">
 	<meta property="og:image" content="https://shami.blog/profile.jpg">
 	<meta property="og:type" content="website">
-{{ else }}	<meta property="og:title" content="{{ .Title }}" />
+{{ else }}	<meta property="og:title" content="{{ .Title }}">
 	{{ if $.Page.Params.description }}<meta name="description" content="{{ .Summary }}">{{ else }}<meta name="description" content="{{ .Summary }}">{{ end }}
 	{{ if $.Page.Params.description }}<meta property="og:description" content="{{ .Summary }}">{{ else }}<meta property="og:description" content="{{ .Summary }}">{{ end }}
 	<meta property="og:image" content="https://shami.blog/profile.jpg">
@@ -16,7 +16,7 @@
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <meta name="twitter:title" content="Shami&#39;s Blog" />
+  <meta name="twitter:title" content="Shami&#39;s Blog">
   <meta property="og:url" content="https://shami.blog/">
 
   {{ $style := resources.Get "hugo.css" }}    
@@ -31,7 +31,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.8.0/build/styles/vs2015.min.css">
 
     {{ range .AlternativeOutputFormats -}}
-    {{ printf `<link rel="%s" type="%s" href="%s" title="%s" />` .Rel .MediaType.Type .Permalink $.Site.Title | safeHTML }}
+    {{ printf `<link rel="%s" type="%s" href="%s" title="%s">` .Rel .MediaType.Type .Permalink $.Site.Title | safeHTML }}
     {{ end -}}
 
    	{{- if in (string .Site.BaseURL) "shami.blog" -}}
