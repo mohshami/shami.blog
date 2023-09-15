@@ -5,7 +5,7 @@
   <nav aria-label="Page navigation">
 	<ul class="list-none inline-flex">
 	<li class="btn-paginate border-r-0 rounded-l-lg focus:shadow-outline hover:bg-blue-100 hidden lg:list-item {{ if $pag.HasPrev }}hover:bg-blue-100{{ else }}pointer-events-none{{ end }}"><a href="{{ $pag.First.URL }}">First</a></li>
-	<li class="btn-paginate border-r-0 focus:shadow-outline hover:bg-blue-100 lg:rounded-none rounded-l-lg {{ if not $pag.HasPrev }}pointer-events-none{{ end }}"><a href="{{ if $pag.HasPrev }}{{ $pag.Prev.URL }}{{ end }}">Prev</a></li>
+    <li class="btn-paginate border-r-0 focus:shadow-outline hover:bg-blue-100 lg:rounded-none rounded-l-lg {{ if not $pag.HasPrev }}pointer-events-none{{ end }}">{{ if $pag.HasPrev }}<a href="{{ $pag.Prev.URL }}">Prev</a>{{ else }}Prev{{ end }}</li>
 
 	<li class="btn-paginate border-r-0 focus:shadow-outline hidden sm:list-item {{ if $pag.HasPrev }}hover:bg-blue-100{{ else }}pointer-events-none bg-blue-300{{ end }}"><a href="{{ $pag.First.URL }}">1</a></li>
 	{{ if gt $first 2 }}
@@ -23,7 +23,7 @@
 	{{ end }}
 	<li class="btn-paginate border-r-0 focus:shadow-outline hidden sm:list-item {{ if $pag.HasNext }}hover:bg-blue-100{{ else }}pointer-events-none bg-blue-300{{ end }}"><a href="{{ $pag.Last.URL }}">{{ $pag.TotalPages }}</a></li>
 
-	<li class="btn-paginate border-r-1 lg:border-r-0 focus:shadow-outline lg:rounded-none rounded-r-lg {{ if $pag.HasNext }}hover:bg-blue-100{{ else }}pointer-events-none{{ end }}"><a href="{{ if $pag.HasNext }}{{ $pag.Next.URL }}{{ end }}">Next</a></li>
+    <li class="btn-paginate border-r-1 lg:border-r-0 focus:shadow-outline lg:rounded-none rounded-r-lg {{ if $pag.HasNext }}hover:bg-blue-100{{ else }}pointer-events-none{{ end }}">{{ if $pag.HasNext }}<a href="{{ $pag.Next.URL }}">Next</a>{{ else }}Next{{ end }}</li>
 	<li class="btn-paginate rounded-r-lg focus:shadow-outline hover:bg-blue-100 hidden lg:list-item {{ if $pag.HasNext }}hover:bg-blue-100{{ else }}pointer-events-none{{ end }}"><a href="{{ $pag.Last.URL }}">Last</a></li>
 	</ul>
   </nav>
