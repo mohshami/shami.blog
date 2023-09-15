@@ -8,8 +8,8 @@
 	<meta property="og:image" content="https://shami.blog/profile.jpg">
 	<meta property="og:type" content="website">
 {{ else }}	<meta property="og:title" content="{{ .Title }}">
-	{{ if $.Page.Params.description }}<meta name="description" content="{{ .Summary }}">{{ else }}<meta name="description" content="{{ .Summary }}">{{ end }}
-	{{ if $.Page.Params.description }}<meta property="og:description" content="{{ .Summary }}">{{ else }}<meta property="og:description" content="{{ .Summary }}">{{ end }}
+	{{ if $.Page.Params.description }}<meta name="description" content="{{ .Summary | plainify | safeHTML }}">{{ else }}<meta name="description" content="{{ .Summary | plainify | safeHTML }}">{{ end }}
+	{{ if $.Page.Params.description }}<meta property="og:description" content="{{ .Summary | plainify | safeHTML }}">{{ else }}<meta property="og:description" content="{{ .Summary | plainify | safeHTML }}">{{ end }}
 	<meta property="og:image" content="https://shami.blog/profile.jpg">
 	<meta property="og:type" content="article">
 {{ end }}
@@ -40,4 +40,6 @@
    	{{- if in (string .Site.BaseURL) "shami.blog" -}}
     <!-- Cloudflare Web Analytics --><script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "9184b26e9b824bdd80bc343db81b46c3"}'></script><!-- End Cloudflare Web Analytics -->
 	{{ end }}
+
+    {{ partial "schema.html" . }}
   </head>

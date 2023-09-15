@@ -2,7 +2,7 @@
 {{ $paginator := .Paginate (where .Site.RegularPages "Section" "post") }}
 {{ range $paginator.Pages }}
 <div class="px-8 py-5 bg-white m-3 rounded-lg">
-  <h2 class="text-3xl font-semibold text-center -mb-2"><a href="{{ .Permalink }}">{{ .Title }}</a></h2>
+  <h2 class="text-3xl font-semibold text-center"><a href="{{ .Permalink }}">{{ .Title }}</a></h2>
   <p class="text-sm text-center">{{ .Date.Format "2006-01-02" }}</p>
   <div class="article">
   {{ if .Truncated }}

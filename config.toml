@@ -10,6 +10,7 @@ enableRobotsTXT = true
 
 [params]
 author = "Mohammad H. AlShami"
+header = "Mohammad H. AlShami"
 
 [permalinks]
 post = "/:year/:month/:title"
