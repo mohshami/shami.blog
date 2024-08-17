@@ -21,7 +21,11 @@
         background-color:#eee;
         font-family: consolas,"Liberation Mono",courier,monospace;
     }
-    
+
+    .hljs {
+        margin-bottom: .5em;
+    }
+
     ul, ol {
         list-style: revert;
         margin-left: 1rem;
@@ -29,6 +33,11 @@
 
     .article a {
         color: #0074d9
+    }
+
+    .article h3 {
+        @apply text-2xl;
+        margin-top: .5em;
     }
 }
 
