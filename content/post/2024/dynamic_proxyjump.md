@@ -2,6 +2,8 @@
 title: "Using SSH ProxyJump only when necessary"
 date: 2024-08-15T08:47:06-04:00
 ---
+**Edit**: Used `grep -F` instead of `fgrep`
+
 One thing I've wanted to do for the longest time was to be able to use SSH with an alias and have ssh choose the bastion host automatically.
 
 [This trick](https://mike.place/2017/ssh-match/) was ok at first, but I wanted something more flexible and I came up with the following:<!--more-->
@@ -28,12 +30,12 @@ Now for the network_detect
 # ~/.ssh/network_detect/office
 #!/usr/bin/env bash
 
-ip addr show | fgrep -q 'inet 10.1.0'
+ip addr show | grep -F -q 'inet 10.1.0'
 
 # ~/.ssh/network_detect/home
 #!/usr/bin/env bash
 
-ip addr show | fgrep -q 'inet 192.168.1'
+ip addr show | grep -F -q 'inet 192.168.1'
 
 # ~/.ssh/network_detect/wireguard
 #!/usr/bin/env bash
