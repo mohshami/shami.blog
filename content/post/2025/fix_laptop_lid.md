@@ -1,9 +1,9 @@
 ---
 title: "Fix external display turning off when closing laptop lid with KDE and Wayland"
 date: 2025-03-26T08:47:06-04:00
-slug = 'fix-laptop-external-display-off'
+slug: 'fix-laptop-external-display-off'
 ---
-I've been using NixOS with KDE Plasma 6.2 and Wayland lately, one weird issue I was running into was not being able to close the laptop lid when I connected to my thunderbolt dock.
+I've been using NixOS with KDE Plasma 6.2 and Wayland lately, one weird issue I was running into was not being able to close the laptop lid when I connected to my thunderbolt dock.<!--more-->
 
 I tested the following Nix configuration with no luck
 
