@@ -4,7 +4,7 @@ baseurl = "/"
 languageCode = 'en-us'
 title = "Shami's Blog"
 theme = 'shami.blog'
-Paginate = 10
+pagination.pagerSize = 10
 enableRobotsTXT = true
 
 [params]

@@ -1,4 +1,5 @@
 {{ $thumb := $.Page.Resources.GetMatch (.Get "thumbnail") }}
+<p>
 <div class="flex justify-center">
     {{ if isset .Params "full" }}
     <a class="spotlight" href='{{ .Get "full" }}'>
@@ -8,3 +9,4 @@
         <img src="{{ $thumb }}" alt="" loading="lazy">
     {{ end }}
 </div>
+</p>
