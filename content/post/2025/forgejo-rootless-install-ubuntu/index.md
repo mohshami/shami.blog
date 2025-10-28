@@ -28,7 +28,7 @@ zfs set aclmode=passthrough tank
 zfs set logbias=throughput tank
 
 # Make sure Podman is working
-podman run --rm helloworld
+podman run --rm hello-world
 ```
 
 {{< thumbnail thumbnail="hello_world_thumb.jpg" full="hello_world.png" >}}
