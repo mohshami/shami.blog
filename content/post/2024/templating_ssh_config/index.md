@@ -1,6 +1,7 @@
 ---
 title: "Templating SSH Client Configuration"
 date: 2024-08-17T09:47:06-04:00
+featured_image: "2024/08/templating-ssh-client-configuration/ssh.jpg"
 ---
 
 **Note**: When I first got the idea for this I used [gomplate](https://gomplate.ca/), then I realized my dotfile manager of choice, [chezmoi](https://www.chezmoi.io/) is better suited for my usecase. I have dumped the files I created in this [gist](https://gist.github.com/mohshami/ea88c2ba63d13ac928501208fe9da3a5) just in case someone finds them useful.<!--more-->
