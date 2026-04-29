@@ -281,7 +281,7 @@ CLOUDFLARE_API_TOKEN=MY_SUPER_SECRET_TOKEN
 ```
 
 Run Caddy
-```caddy
+```bash
 # Make sure /var/www is created and owned by www-data
 mkdir /var/www
 chown -R www-data:www-data /var/www
