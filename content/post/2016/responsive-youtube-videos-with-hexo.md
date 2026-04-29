@@ -11,7 +11,7 @@ So now that I have finally finished fixing my content migration issues I can get
 
 While checking my old posts I noticed embedded using the &#123;% youtube %&#125; tag looked like this:<!--more-->
 
-<p><div class="video-container"><iframe src="//www.youtube.com/embed/tcG_15pkIkc" frameborder="0" allowfullscreen></iframe></div></p>
+{{< youtube tcG_15pkIkc >}}
 
 To solve this, I changed /node_modules/hexo/lib/plugins/tag/youtube.js and replaced the return line with
 
@@ -21,4 +21,4 @@ return '&lt;style&gt;.codegena{position:relative;width:100%;height:0;padding-bot
 
 Now videos look much better
 
-<p><style>.codegena{position:relative;width:100%;height:0;padding-bottom:56.27198%;}.codegena iframe{position:absolute;top:0;left:0;width:100%;height:100%;}</style><div class="codegena"><iframe width="500" height="294" src="https://www.youtube.com/embed/tcG_15pkIkc?&autohide=2" frameborder="0"></iframe></div></p>
+{{< youtube tcG_15pkIkc >}}
