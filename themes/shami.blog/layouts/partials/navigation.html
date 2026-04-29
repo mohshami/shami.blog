@@ -1,7 +1,7 @@
 {{ $pag := .Paginate (where .Data.Pages "Type" "post") }}
 {{ $first := sub $pag.PageNumber 2 }}
 {{ $last := add $pag.PageNumber 2 }}
-<div class="bg-white p-4 flex items-center flex-wrap justify-center">
+<div class="p-4 flex items-center flex-wrap justify-center">
   <nav aria-label="Page navigation">
 	<ul class="list-none inline-flex">
 	<li class="btn-paginate border-r-0 rounded-l-lg focus:shadow-outline hover:bg-blue-100 hidden lg:list-item {{ if $pag.HasPrev }}hover:bg-blue-100{{ else }}pointer-events-none{{ end }}"><a href="{{ $pag.First.URL }}">First</a></li>

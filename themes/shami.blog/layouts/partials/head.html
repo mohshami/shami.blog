@@ -1,4 +1,22 @@
 <head>
+  <script>
+    (function() {
+      function applyTheme() {
+        var stored = localStorage.getItem('theme');
+        if (stored === 'dark' || (!stored && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+          document.documentElement.classList.add('dark');
+        } else {
+          document.documentElement.classList.remove('dark');
+        }
+      }
+      applyTheme();
+      window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', function() {
+        if (!localStorage.getItem('theme')) {
+          applyTheme();
+        }
+      });
+    })();
+  </script>
   <title>{{ if .IsHome }}{{ .Title }}{{ else }}{{ .Title }} &#x7c; {{ .Site.Title }}{{ end }}</title>
   <meta charset="UTF-8">
 
@@ -24,6 +42,9 @@
 
   {{ $style := resources.Get "hugo.css" }}
   <link rel="stylesheet" href="{{ $style.Permalink }}">
+
+  {{ $darkStyle := resources.Get "dark-mode.css" }}
+  <link rel="stylesheet" href="{{ $darkStyle.Permalink }}">
 
     <link rel="stylesheet" href="https://rawcdn.githack.com/nextapps-de/spotlight/0.7.8/dist/css/spotlight.min.css">
     <script src="https://rawcdn.githack.com/nextapps-de/spotlight/0.7.8/dist/js/spotlight.min.js"></script>

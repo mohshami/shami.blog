@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="en" xml:lang="en">
 {{- partial "head.html" . -}}
-<body class="bg-gray-100">
+<body class="bg-light-body text-light-text">
   <div class="flex flex-col h-screen justify-between">
     {{- partial "header.html" . -}}
     <main class="mb-auto">
@@ -21,5 +21,17 @@
   </div>
 <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.8.0/build/highlight.min.js"></script>
 <script>hljs.highlightAll();</script>
+<script>
+  function toggleTheme() {
+    var html = document.documentElement;
+    if (html.classList.contains('dark')) {
+      html.classList.remove('dark');
+      localStorage.setItem('theme', 'light');
+    } else {
+      html.classList.add('dark');
+      localStorage.setItem('theme', 'dark');
+    }
+  }
+</script>
 </body>
 </html>
