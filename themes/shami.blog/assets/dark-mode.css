@@ -83,7 +83,7 @@ code {
   color: #d4d4d4 !important;
 }
 
-/* Inline code (not inside .hljs) */
+/* Inline code (not inside pre blocks) */
 :not(pre) > code {
   background-color: #1e1e1e !important;
   color: #d4d4d4 !important;
@@ -91,10 +91,21 @@ code {
   border-radius: 3px;
 }
 
-/* Highlight.js code blocks */
-.hljs {
+/* Chroma-highlighted code block container */
+.highlight {
   background: #1e1e1e !important;
-  color: #d4d4d4 !important;
+  margin-bottom: 1em;
+  overflow-x: auto;
+}
+
+.highlight pre,
+.highlight code {
+  background: transparent !important;
+}
+
+/* Generic pre overflow for any code blocks */
+pre {
+  overflow-x: auto;
 }
 
 /* Borders */

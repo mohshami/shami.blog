@@ -15,3 +15,9 @@ images = ["/profile.jpg"]
 [permalinks]
 post = "/:year/:month/:title"
 
+[markup]
+  [markup.highlight]
+    noClasses = true
+    style = "github"
+    guessSyntax = true
+
