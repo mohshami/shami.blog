@@ -473,6 +473,7 @@ ul, ol {
   font-size: 1.5rem;
   line-height: 2rem;
   margin-top: .5em;
+  font-weight: 600;
 }
 
 *, ::before, ::after {
