@@ -280,3 +280,23 @@ User requested removal of the blue left accent border on post cards. The regular
 
 ### Files touched
 - **themes/shami.blog/assets/dark-mode.css** — Removed `border-left: 4px solid var(--text-link)` from `.px-8.py-5.bg-white`
+
+---
+
+## 2026-04-29 — Added gap between social media icons
+
+### What was changed and why
+Added spacing between the Twitter and LinkedIn logos in the sidebar for better visual separation.
+
+### Files touched
+- **themes/shami.blog/layouts/partials/sidebar.html** — Added `style="gap: 1em;"` to the flex container holding social links
+
+---
+
+## 2026-04-29 — Made entire pagination button clickable
+
+### What was changed and why
+Pagination buttons were only clickable on the text/number. Made the entire button area clickable using absolute positioning on the `<a>` tag.
+
+### Files touched
+- **themes/shami.blog/assets/dark-mode.css** — Added `.btn-paginate a { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; }` to expand the link to fill the entire button

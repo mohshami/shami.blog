@@ -255,6 +255,13 @@ input[name="q"] {
   background-color: var(--bg-hover) !important;
 }
 
+/* Make entire pagination button clickable */
+.btn-paginate a {
+  display: block;
+  margin: -0.5rem -1rem;
+  padding: 0.5rem 1rem;
+}
+
 /* Theme toggle button */
 .theme-toggle {
   position: absolute;
