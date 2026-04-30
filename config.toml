@@ -18,6 +18,6 @@ post = "/:year/:month/:title"
 [markup]
   [markup.highlight]
     noClasses = true
-    style = "github"
+    style = "dracula"
     guessSyntax = true
 
