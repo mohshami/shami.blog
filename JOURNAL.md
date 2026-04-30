@@ -258,3 +258,25 @@ Extensive code blocks (like the Forgejo post) needed better usability. Added:
 - **config.toml** — Added `lineNos = true`, `lineNumbersInTable = false` to `[markup.highlight]`
 - **themes/shami.blog/layouts/_default/baseof.html** — Added copy-to-clipboard JS that attaches a button to every `<pre>` block
 - **themes/shami.blog/assets/dark-mode.css** — Added `.code-copy-btn` styling (absolute positioning, hover reveal, dark theme matching)
+
+---
+
+## 2026-04-29 — Updated tagline, moved to config
+
+### What was changed and why
+Changed the blog tagline from "Sysadmin, Because Even Developers Need Heroes" to "DevOps because uptime is not optional" — more descriptive of the current content scope. Moved it to config.toml so it can be changed in one place.
+
+### Files touched
+- **config.toml** — Added `tagline` parameter under `[params]`
+- **themes/shami.blog/layouts/partials/header.html** — Now reads tagline from `.Site.Params.tagline`
+- **themes/shami.blog/layouts/partials/head.html** — Uses `$tagline` variable for home page meta descriptions, with fallback default
+
+---
+
+## 2026-04-29 — Removed blue left accent border from cards
+
+### What was changed and why
+User requested removal of the blue left accent border on post cards. The regular border and shadow remain for visual separation.
+
+### Files touched
+- **themes/shami.blog/assets/dark-mode.css** — Removed `border-left: 4px solid var(--text-link)` from `.px-8.py-5.bg-white`
