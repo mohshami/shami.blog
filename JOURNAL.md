@@ -311,3 +311,13 @@ The "Read More - {Post Title}" pattern was redundant since the title is already 
 ### Files touched
 - **themes/shami.blog/layouts/_default/list.html** — Changed link text to `Read more &rarr;`
 - **themes/shami.blog/layouts/_default/term.html** — Same change
+
+---
+
+## 2026-04-29 — Replaced social icon PNGs with inline SVGs
+
+### What was changed and why
+Twitter and LinkedIn logos were loaded as separate PNG files (`/twitter.png`, `/linkedin.png`). Replaced with inline SVGs for better scaling, no external requests, and proper accessibility with `aria-label`.
+
+### Files touched
+- **themes/shami.blog/layouts/partials/sidebar.html** — Replaced `<img>` tags with inline `<svg>` elements (Twitter bird + LinkedIn "in" logo), added `aria-label` to each link
