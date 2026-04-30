@@ -234,3 +234,13 @@ Single post pages only showed the date. Added reading time and category badges t
 
 ### Files touched
 - **themes/shami.blog/layouts/_default/single.html** — Replaced single date line with the same `.post-meta` flex row (date, reading time, category badges) used on the listing page
+
+---
+
+## 2026-04-29 — Hide pagination when only one page
+
+### What was changed and why
+The pagination bar was showing even when there was only one page of results. Wrapped the navigation partial content in `{{ if gt $pag.TotalPages 1 }}` so it only renders when there are multiple pages.
+
+### Files touched
+- **themes/shami.blog/layouts/partials/navigation.html** — Added conditional around the entire pagination block

@@ -28,4 +28,15 @@
 {{ end }}
 </ul>
   </div>
+  <div class="px-8 py-5 bg-white m-3 rounded-lg">
+    <p class="text-xl">Categories</p>
+<ul class="ml-0">
+{{- range $name, $taxonomy := site.Taxonomies.categories }}
+<li class="border-b border-dotted border-slate-400 mb-2 truncate">
+  <a href="{{ "/categories/" | relLangURL }}{{ $name | urlize }}">{{ $name }}</a>
+  <span class="text-sm" style="color: var(--text-secondary);">({{ len $taxonomy }})</span>
+</li>
+{{ end }}
+</ul>
+  </div>
 </div>
