@@ -327,10 +327,10 @@ Twitter and LinkedIn logos were loaded as separate PNG files (`/twitter.png`, `/
 ## 2026-04-29 — Added SVG favicon
 
 ### What was changed and why
-Replaced the empty `data:,` favicon placeholder with a proper SVG favicon showing "SB" (blog initials) on a blue rounded-square background.
+Replaced the empty `data:,` favicon placeholder with a proper SVG favicon showing "S" (blog initial) on a blue rounded-square background. Reverted from "SB" to "S" for simplicity.
 
 ### Files touched
-- **themes/shami.blog/static/favicon.svg** (new) — 32×32 SVG with `#2563eb` rounded-square background and white "SB" text
+- **themes/shami.blog/static/favicon.svg** (new) — 32×32 SVG with `#2563eb` rounded-square background and white "S" text
 - **themes/shami.blog/layouts/partials/head.html** — Updated `<link rel="icon">` to point to `/favicon.svg`
 
 ---
