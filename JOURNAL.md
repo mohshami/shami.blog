@@ -296,7 +296,18 @@ Added spacing between the Twitter and LinkedIn logos in the sidebar for better v
 ## 2026-04-29 — Made entire pagination button clickable
 
 ### What was changed and why
-Pagination buttons were only clickable on the text/number. Made the entire button area clickable using absolute positioning on the `<a>` tag.
+Pagination buttons were only clickable on the text/number. Made the entire button area clickable using negative margins on the `<a>` tag.
 
 ### Files touched
-- **themes/shami.blog/assets/dark-mode.css** — Added `.btn-paginate a { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; }` to expand the link to fill the entire button
+- **themes/shami.blog/assets/dark-mode.css** — Added `.btn-paginate a { display: block; margin: -0.5rem -1rem; padding: 0.5rem 1rem; }` to expand the link to fill the entire button
+
+---
+
+## 2026-04-29 — Simplified "Read More" link
+
+### What was changed and why
+The "Read More - {Post Title}" pattern was redundant since the title is already displayed above. Simplified to "Read more →".
+
+### Files touched
+- **themes/shami.blog/layouts/_default/list.html** — Changed link text to `Read more &rarr;`
+- **themes/shami.blog/layouts/_default/term.html** — Same change
