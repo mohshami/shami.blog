@@ -173,3 +173,27 @@ Found one markdown file with an odd number of fence markers (45). The last code 
 
 ### Known issues or follow-up items
 - None currently
+
+---
+
+## 2026-04-29 — Typography & font improvements
+
+### What was changed and why
+Improved the blog's typography and readability per UI suggestion. Changed the font stack to a modern system font stack, increased base font size, and improved line height for long-form reading.
+
+### Files touched
+- **themes/shami.blog/assets/dark-mode.css** — Added font stack (`Inter, system-ui, -apple-system, ...`), base font size `16px`, line-height `1.7`
+
+### Decisions made with rationale
+- Kept changes strictly to font properties (font-family, font-size, line-height) — no margin/padding changes as requested by user
+- Used `Inter` as the preferred font with a system-ui fallback chain for broad compatibility and fast loading (no web font download needed)
+
+---
+
+## 2026-04-29 — Card visual distinction for post listing
+
+### What was changed and why
+Posts on the listing page blended into each other. Added subtle card borders, a blue left accent border, and a hover shadow to create visual rhythm and improve scanning.
+
+### Files touched
+- **themes/shami.blog/assets/dark-mode.css** — Added `border`, `border-left: 4px solid var(--text-link)`, and `box-shadow` to `.px-8.py-5.bg-white` cards; hover state increases shadow depth
