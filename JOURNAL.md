@@ -244,3 +244,17 @@ The pagination bar was showing even when there was only one page of results. Wra
 
 ### Files touched
 - **themes/shami.blog/layouts/partials/navigation.html** — Added conditional around the entire pagination block
+
+---
+
+## 2026-04-29 — Code block improvements: copy button, line numbers
+
+### What was changed and why
+Extensive code blocks (like the Forgejo post) needed better usability. Added:
+- **Copy-to-clipboard button** — appears on hover in the top-right corner of code blocks, shows "Copied!" feedback
+- **Line numbers** — enabled via Hugo Chroma config for all code blocks
+
+### Files touched
+- **config.toml** — Added `lineNos = true`, `lineNumbersInTable = false` to `[markup.highlight]`
+- **themes/shami.blog/layouts/_default/baseof.html** — Added copy-to-clipboard JS that attaches a button to every `<pre>` block
+- **themes/shami.blog/assets/dark-mode.css** — Added `.code-copy-btn` styling (absolute positioning, hover reveal, dark theme matching)

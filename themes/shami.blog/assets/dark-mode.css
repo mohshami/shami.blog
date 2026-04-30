@@ -169,16 +169,44 @@ code {
   margin-bottom: 1em;
   overflow-x: auto;
   border: 1px solid #374151;
+  position: relative;
 }
 
 .highlight pre {
   padding: 1em !important;
   margin: 0 !important;
+  padding-right: 4em !important;
 }
 
 .highlight pre,
 .highlight code {
   background: transparent !important;
+}
+
+/* Copy-to-clipboard button */
+.code-copy-btn {
+  position: absolute;
+  top: 0.5em;
+  right: 0.5em;
+  background: #374151;
+  color: #d4d4d4;
+  border: 1px solid #4b5563;
+  border-radius: 4px;
+  padding: 0.25em 0.6em;
+  font-size: 0.75rem;
+  font-family: inherit;
+  cursor: pointer;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+  z-index: 10;
+}
+
+.highlight:hover .code-copy-btn {
+  opacity: 1;
+}
+
+.code-copy-btn:hover {
+  background: #4b5563;
 }
 
 /* Generic pre overflow for any code blocks */

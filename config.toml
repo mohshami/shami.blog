@@ -20,4 +20,6 @@ post = "/:year/:month/:title"
     noClasses = true
     style = "dracula"
     guessSyntax = true
+    lineNos = true
+    lineNumbersInTable = false
 
