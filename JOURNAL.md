@@ -321,3 +321,24 @@ Twitter and LinkedIn logos were loaded as separate PNG files (`/twitter.png`, `/
 
 ### Files touched
 - **themes/shami.blog/layouts/partials/sidebar.html** — Replaced `<img>` tags with inline `<svg>` elements (Twitter bird + LinkedIn "in" logo), added `aria-label` to each link
+
+---
+
+## 2026-04-29 — Added SVG favicon
+
+### What was changed and why
+Replaced the empty `data:,` favicon placeholder with a proper SVG favicon showing "SB" (blog initials) on a blue rounded-square background.
+
+### Files touched
+- **themes/shami.blog/static/favicon.svg** (new) — 32×32 SVG with `#2563eb` rounded-square background and white "SB" text
+- **themes/shami.blog/layouts/partials/head.html** — Updated `<link rel="icon">` to point to `/favicon.svg`
+
+---
+
+## 2026-04-29 — Adjusted About Me card social icon spacing
+
+### What was changed and why
+Equalized and reduced the spacing above and below the social icons in the About Me sidebar card. Final values: `0.8rem` above and below (reduced in two iterations from the original `1.25rem`).
+
+### Files touched
+- **themes/shami.blog/layouts/partials/sidebar.html** — Set `margin-top: 1rem` on social icons paragraph, added `style="padding-bottom: 1rem;"` to About Me card
