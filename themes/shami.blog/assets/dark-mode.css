@@ -13,6 +13,7 @@
   --border-primary: #e5e7eb;
   --border-secondary: #94a3b8;
   --bg-hover: #dbeafe;
+  --accent: #2563eb;
 }
 
 html.dark {
@@ -29,6 +30,7 @@ html.dark {
   --border-primary: #4b5563;
   --border-secondary: #6b7280;
   --bg-hover: #1e3a5f;
+  --accent: #60a5fa;
 }
 
 /* Body background */
@@ -52,6 +54,22 @@ body {
 .px-8.py-5.bg-white:hover {
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
 }
+
+/* ===== Accent Colors ===== */
+
+.article h1,
+.article h2,
+.article h3,
+.article h4 {
+  color: var(--accent);
+}
+
+.px-8.py-5.bg-white > .text-sm {
+  color: var(--text-secondary);
+  font-style: italic;
+}
+
+/* ===== Code Block Styling ===== */
 
 body {
   background-color: var(--bg-body) !important;
@@ -117,6 +135,12 @@ code {
   background: #1e1e1e !important;
   margin-bottom: 1em;
   overflow-x: auto;
+  border: 1px solid #374151;
+}
+
+.highlight pre {
+  padding: 1em !important;
+  margin: 0 !important;
 }
 
 .highlight pre,

@@ -197,3 +197,16 @@ Posts on the listing page blended into each other. Added subtle card borders, a 
 
 ### Files touched
 - **themes/shami.blog/assets/dark-mode.css** — Added `border`, `border-left: 4px solid var(--text-link)`, and `box-shadow` to `.px-8.py-5.bg-white` cards; hover state increases shadow depth
+
+---
+
+## 2026-04-29 — Accent colors and code block polish
+
+### What was changed and why
+Added accent colors for personality and improved code block styling:
+- Article headings (`h1`–`h4`) now use the accent color (blue)
+- Post date labels styled with secondary color and italic
+- Code block containers (`.highlight`) got padding, a subtle border, and a distinct dark background tint
+
+### Files touched
+- **themes/shami.blog/assets/dark-mode.css** — Added `--accent` CSS variable, heading accent color rules, date label styling, and enhanced `.highlight` container with `padding: 1em` and `border: 1px solid #374151`
