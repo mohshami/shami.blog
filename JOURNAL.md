@@ -41,3 +41,135 @@ Added a dark/light mode toggle to the blog theme header. The initial theme value
 - The `bg-white` CSS selector `.px-8.py-5.bg-white` in dark-mode.css relies on the exact Tailwind class combination. If the markup changes, this selector may need updating. Consider using a semantic class instead if this becomes fragile.
 - Highlight.js code blocks use a generic dark background in dark mode rather than switching to a specific dark syntax theme (e.g., `vs2015` to `monokai`). Could be improved by conditionally loading a different HLJS theme CSS.
 - The `vs2015.min.css` Highlight.js theme is actually already a dark theme, so code blocks may look inconsistent against dark backgrounds in light mode vs. dark mode. The CSS override `html.dark .hljs { background: var(--bg-highlight) }` addresses this partially.
+
+## 2026-04-29 — Dark mode pagination support
+
+### What was changed and why
+Added dark mode CSS overrides for pagination classes (`bg-blue-300`, `hover:bg-blue-100`) that were used in the navigation partial.
+
+### Files touched
+- **themes/shami.blog/assets/dark-mode.css** — Added `.bg-blue-300` and `.hover\:bg-blue-100:hover` overrides
+
+---
+
+## 2026-04-29 — Dark background for code blocks in light mode
+
+### What was changed and why
+Code blocks had inconsistent colors in light mode (inline code was light gray, highlighted code blocks were dark). Made all code blocks use a dark background (`#1e1e1e`) with light text (`#d4d4d4`) for consistency with the vs2015 highlight.js theme.
+
+### Files touched
+- **themes/shami.blog/assets/dark-mode.css** — Updated `code`, `:not(pre) > code`, and `.hljs` rules to use dark backgrounds in all modes
+
+---
+
+## 2026-04-29 — H3 heading font weight adjustment
+
+### What was changed and why
+Made `.article h3` headings bold, then reduced from `bold` (700) to `600` (semibold) at user request for a softer emphasis.
+
+### Files touched
+- **themes/shami.blog/assets/hugo.css** — Added `font-weight: 600` to `.article h3` rule
+
+---
+
+## 2026-04-29 — Fix raw HTML warnings in markdown content
+
+### What was changed and why
+Hugo's Goldmark renderer was warning about raw HTML being omitted in three posts. Fixed the files instead of enabling `unsafe` markup:
+- Keyboard shortcuts (`<Super>`, `<Alt>`) were being parsed as HTML tags — wrapped in backticks as inline code
+- YouTube embeds used raw `<iframe>`/`<div>` — replaced with `{{< youtube >}}` shortcode
+- Spotlight gallery used raw `<div>`/`<a>` — replaced with a new `{{< spotlight >}}` shortcode
+
+### Files touched
+- **content/post/2008/tips-for-keyboard-shortcuts-under-gnome.md** — Wrapped keyboard shortcuts in backticks
+- **content/post/2016/responsive-youtube-videos-with-hexo.md** — Replaced raw HTML with `{{< youtube >}}` shortcode
+- **content/post/2009/fixing-banders-xbox-360/index.md** — Replaced raw HTML with `{{< spotlight >}}` shortcode
+- **themes/shami.blog/layouts/shortcodes/spotlight.html** (new) — Spotlight lightbox shortcode
+
+### Decisions made with rationale
+- Chose to fix content files rather than enable `unsafe` markup, per user request. This is safer and follows Hugo best practices.
+
+---
+
+## 2026-04-29 — Make YouTube shortcode responsive
+
+### What was changed and why
+The YouTube shortcode used Tailwind aspect-ratio classes (`aspect-w-16`, `aspect-h-9`) that don't exist in the compiled CSS (plugin was commented out). Replaced with inline styles using the standard `padding-bottom` responsive embed technique.
+
+### Files touched
+- **themes/shami.blog/layouts/shortcodes/youtube.html** — Replaced Tailwind classes with inline responsive styles
+
+---
+
+## 2026-04-29 — Configurable Open Graph preview image
+
+### What was changed and why
+The `og:image` was hardcoded to `https://shami.blog/profile.jpg`. Made it configurable via `config.toml` with per-page override support via front matter `images` or `featured_image` params. Also switched from hardcoded domain to `absURL` for portability.
+
+### Files touched
+- **config.toml** — Added `images = ["/profile.jpg"]` to `[params]`
+- **themes/shami.blog/layouts/partials/head.html** — Dynamic `og:image` resolution with fallback chain: page `images` → page `featured_image` → site `images` → default `/profile.jpg`
+
+---
+
+## 2026-04-29 — Replace highlight.js with Hugo Chroma
+
+### What was changed and why
+Removed highlight.js (CDN-loaded JS with security concerns) and replaced with Hugo's built-in Chroma syntax highlighter (build-time, no JS, no external dependencies).
+
+### Files touched
+- **config.toml** — Added `[markup.highlight]` with `noClasses = true`, `style = "dracula"`, `guessSyntax = true`
+- **themes/shami.blog/layouts/partials/head.html** — Removed highlight.js CSS CDN link
+- **themes/shami.blog/layouts/_default/baseof.html** — Removed highlight.js JS CDN script and `hljs.highlightAll()` call
+- **themes/shami.blog/assets/dark-mode.css** — Replaced `.hljs` selector with `.highlight` (Chroma's wrapper class)
+
+### Decisions made with rationale
+- Used `noClasses = true` (inline styles) for simplest setup — no external CSS needed
+- Chose "dracula" style for good readability on dark backgrounds
+- `guessSyntax = true` auto-detects language when not specified
+
+---
+
+## 2026-04-29 — Horizontal scrollbar for code blocks
+
+### What was changed and why
+Code blocks were spilling outside their container. Added `overflow-x: auto` to enable horizontal scrolling.
+
+### Files touched
+- **themes/shami.blog/assets/dark-mode.css** — Added `overflow-x: auto` to `.highlight` and `pre`
+
+---
+
+## 2026-04-29 — Empty favicon to prevent 404s
+
+### What was changed and why
+Added `<link rel="icon" href="data:,">` to inform browsers that no favicon exists, preventing automatic 404 requests to `/favicon.ico`.
+
+### Files touched
+- **themes/shami.blog/layouts/partials/head.html** — Added empty favicon link
+
+---
+
+## 2026-04-29 — Remove rounded edges from code blocks
+
+### What was changed and why
+User requested no rounded corners on code blocks.
+
+### Files touched
+- **themes/shami.blog/assets/dark-mode.css** — Removed `border-radius: 6px` from `.highlight`
+
+---
+
+## 2026-04-29 — Fix unclosed code block in 2015 mail server post
+
+### What was changed and why
+Found one markdown file with an odd number of fence markers (45). The last code block's closing fence was on the same line as content instead of its own line, so Goldmark didn't recognize it. Moved closing ``` to its own line.
+
+### Files touched
+- **content/post/2015/howto-small-mail-server-with-salt-dovecot-and-opensmtpd.md**
+
+### Verification
+- Ran check across all .md files — no more odd fence counts
+
+### Known issues or follow-up items
+- None currently

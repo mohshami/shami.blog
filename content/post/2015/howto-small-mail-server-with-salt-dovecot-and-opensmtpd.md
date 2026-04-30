@@ -448,6 +448,7 @@ salt 'mailsrv' state.highstate
 
 Just a note, when the first client authenticates with OpenSMTPD after a restart, the log file will show the following error
 ```plaintext
-Authentication temporarily failed for user user@domain```
+Authentication temporarily failed for user user@domain
+```
 
 That's OK, it will switch to the virtual user file afterwards. Not sure if this is a bug or a feature
