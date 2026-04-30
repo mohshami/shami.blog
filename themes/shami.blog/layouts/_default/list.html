@@ -3,7 +3,16 @@
 {{ range $paginator.Pages }}
 <div class="px-8 py-5 bg-white m-3 rounded-lg">
   <h2 class="text-3xl font-semibold text-center"><a href="{{ .Permalink }}">{{ .Title }}</a></h2>
-  <p class="text-sm text-center">{{ .Date.Format "2006-01-02" }}</p>
+  <div class="post-meta">
+    <time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "2006-01-02" }}</time>
+    <span class="post-dot">&middot;</span>
+    <span class="post-reading-time">{{ .ReadingTime }} min read</span>
+    {{ with .Params.categories }}
+      {{ range . }}
+      <span class="post-badge">{{ . }}</span>
+      {{ end }}
+    {{ end }}
+  </div>
   <div class="article">
   {{ if .Truncated }}
   {{ .Summary }}

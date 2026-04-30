@@ -69,6 +69,39 @@ body {
   font-style: italic;
 }
 
+/* Post listing metadata */
+.post-meta {
+  text-align: center;
+  color: var(--text-secondary);
+  font-size: 0.875rem;
+  margin-bottom: 1em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5em;
+  flex-wrap: wrap;
+}
+
+.post-dot {
+  opacity: 0.5;
+}
+
+.post-badge {
+  display: inline-block;
+  padding: 0.15em 0.6em;
+  background-color: var(--accent);
+  color: #ffffff;
+  font-size: 0.75rem;
+  font-weight: 600;
+  border-radius: 4px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+html.dark .post-badge {
+  color: #111827;
+}
+
 /* ===== Code Block Styling ===== */
 
 body {

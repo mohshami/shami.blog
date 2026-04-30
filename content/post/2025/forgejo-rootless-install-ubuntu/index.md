@@ -1,6 +1,8 @@
 ---
 title: "Forgejo Rootless Install with Podman and Ubuntu 24.04"
 date: 2025-10-25T05:23:25+03:00
+categories:
+  - Technical
 ---
 I have recently switched from [Docker](https://www.docker.com) to [Podman](https://podman.io/), mostly because Podman's integration with SystemD feels better to me than Docker Compose, especially with [podman-quadlet](https://docs.podman.io/en/latest/markdown/podman-quadlet.1.html). Setting up rootless [Forgejo](https://forgejo.org/) with Podman took some time figuring out so I decided to document it here.<!--more-->
 

@@ -210,3 +210,27 @@ Added accent colors for personality and improved code block styling:
 
 ### Files touched
 - **themes/shami.blog/assets/dark-mode.css** — Added `--accent` CSS variable, heading accent color rules, date label styling, and enhanced `.highlight` container with `padding: 1em` and `border: 1px solid #374151`
+
+---
+
+## 2026-04-29 — Post listing metadata (reading time, category badges)
+
+### What was changed and why
+Post listing only showed dates. Added reading time and category badges to help users quickly scan and decide what's relevant.
+
+### Files touched
+- **themes/shami.blog/layouts/_default/list.html** — Replaced single date line with a `.post-meta` flex row containing: date (`<time>`), reading time (`.post-reading-time` via Hugo's `.ReadingTime`), and category badges (`.post-badge` from `.Params.categories`)
+- **themes/shami.blog/assets/dark-mode.css** — Added styling for `.post-meta` (centered flex row), `.post-badge` (accent-colored pill), and `.post-dot` (separator)
+
+### Known issues or follow-up items
+- No posts currently use `tags` in front matter, so tag badges are not shown. The template can easily be extended with `{{ with .Params.tags }}` if tags are added later
+
+---
+
+## 2026-04-29 — Add reading time to single post pages
+
+### What was changed and why
+Single post pages only showed the date. Added reading time and category badges to match the listing page layout.
+
+### Files touched
+- **themes/shami.blog/layouts/_default/single.html** — Replaced single date line with the same `.post-meta` flex row (date, reading time, category badges) used on the listing page
