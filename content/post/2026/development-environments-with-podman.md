@@ -91,7 +91,7 @@ set -e
 export DEBIAN_FRONTEND=noninteractive
 
 apt-get update
-apt-get install --no-install-recommends -y curl fish build-essential ripgrep unzip fd-find luarocks locales tree-sitter-cli sudo git ca-certificates
+apt-get install --no-install-recommends -y curl fish build-essential ripgrep unzip fd-find luarocks locales tree-sitter-cli sudo git ca-certificates openssh-client
 update-ca-certificates
 
 luarocks --lua-version 5.1 install jsregexp
