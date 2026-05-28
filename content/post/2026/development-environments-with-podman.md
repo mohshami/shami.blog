@@ -1,6 +1,8 @@
 ---
 title: "Development Environments With Podman"
 date: 2026-05-28T09:56:28+03:00
+categories:
+  - Technical
 ---
 A while back I switched to NixOS. Then when I started playing with Rust, I found out Rust does not play nicely with Nix. So I went on the journy of finding an alternative.<!--more-->
 
