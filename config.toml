@@ -1,7 +1,7 @@
 # baseURL = 'https://shami.blog/'
 baseurl = "/"
 
-languageCode = 'en-us'
+locale = 'en-us'
 title = "Shami's Blog"
 theme = 'shami.blog'
 pagination.pagerSize = 10
