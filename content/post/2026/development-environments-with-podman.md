@@ -21,7 +21,7 @@ To achieve this I used 2 wrapper scripts and a small configuration file
 
 Now for the scripts:
 
-```bash {filename=&quot;devenv-buildimage&quot;}
+```bash {filename="devenv-buildimage"}
 #!/bin/bash
 
 # devenv-buildimage
@@ -131,7 +131,7 @@ echo "==> Done. Image built: $IMAGE_NAME"
 ```
 
 
-```bash {filename=&quot;devenv-createcontainer&quot;}
+```bash {filename="devenv-createcontainer"}
 #!/bin/bash
 
 # devenv-createcontainer
