@@ -342,3 +342,20 @@ Equalized and reduced the spacing above and below the social icons in the About 
 
 ### Files touched
 - **themes/shami.blog/layouts/partials/sidebar.html** — Set `margin-top: 1rem` on social icons paragraph, added `style="padding-bottom: 1rem;"` to About Me card
+
+---
+
+## 2026-05-28 — Fixed extra space before punctuation after hyperlinks
+
+### What was changed and why
+Hyperlinks in the middle of sentences followed by punctuation (e.g., `[link](url),`) were rendering with an unwanted space before the punctuation mark. This was caused by a trailing newline (`\n`) in the `render-link.html` Hugo render-hook template. Hugo included that newline in the rendered HTML output, which browsers collapsed into a visible space between the link and the punctuation.
+
+### Files touched
+- **themes/shami.blog/layouts/_default/_markup/render-link.html** — Removed the trailing newline so the template outputs the `<a>` tag immediately followed by whatever text comes next in the markdown.
+
+### Decisions made with rationale
+- Chose to fix at the template level rather than with CSS (e.g., `white-space: nowrap`) because CSS-based fixes can have side effects like preventing long links from wrapping on narrow viewports. Removing the extraneous newline is the root-cause fix.
+
+### Verification
+- Rebuilt the site with `hugo` and inspected generated HTML.
+- Confirmed that links followed by commas, periods, etc., no longer have a newline/space between `</a>` and the punctuation (e.g., `...<a href="...">Microsoft</a>, you can't...` instead of `...<a href="...">Microsoft</a>\n, you can't...`).
