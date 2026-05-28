@@ -248,7 +248,7 @@ volume=./:/workspace
 # Share .ssh configuration in read-only mode
 volume=~/.ssh:/home/devuser/.ssh:ro
 
-# neovim and fish doesn't really play nicely with read only, so create them as
+# Neovim and fish doesn't really play nicely with read only, so create them as
 # an overlay share, container can modify but changes are not mirrored to the host
 volume=~/.config/fish:/home/devuser/.config/fish:O
 volume=~/.config/nvim:/home/devuser/.config/nvim:O
@@ -277,7 +277,7 @@ Now all you need to do is:
 * Run `devenv-buildimage` to create/update the dev environment.
 * Run `devenv-createcontainer` to create the final development environment.
 * Run `podman exec -it CONTAINER_NAME fish` to enter the development shell.
-* Run `mise use -g neovim lazygit` to install neovim and lazygit globally in the container. Other tools can also be used
+* Run `mise use -g neovim lazygit` to install Neovim and lazygit globally in the container. Other tools can also be used
 * Run `mise trust .` in `/workspace` to trust any mise settings inside that workspace (This is only needed once per container per path)
 
 To get SSH working with the read-only share, you can add the following to the beginning of `~/.ssh/config`
