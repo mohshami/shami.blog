@@ -249,7 +249,7 @@ volume=./:/workspace
 # Share .ssh configuration in read-only mode
 volume=~/.ssh:/home/devuser/.ssh:ro
 
-# Neovim and fish doesn't really play nicely with read only, so create them as
+# neovim and fish doesn't really play nicely with read only, so create them as
 # an overlay share, container can modify but changes are not mirrored to the host
 volume=~/.config/fish:/home/devuser/.config/fish:O
 volume=~/.config/nvim:/home/devuser/.config/nvim:O
