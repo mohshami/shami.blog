@@ -282,3 +282,24 @@ Now all you need to do is:
 * Run `podman exec -it CONTAINER_NAME fish` to enter the development shell.
 * Run `mise use -g neovim lazygit` to install neovim and lazygit globally in the container. Other tools can also be used
 * Run `mise trust .` in `/workspace` to trust any mise settings inside that workspace (This is only needed once per container per path)
+
+To get SSH working with the read-only share, you can add the following to the beginning of `~/.ssh/config`
+```plaintext
+Match exec "test \"$container\" = 'podman'"
+    UserKnownHostsFile /tmp/known_hosts_podman
+```
+
+For fish, I have the following customizations in `~/.config/fish/conf.d/mise.fish`
+```fish
+if test "$container" = podman; or test -f /run/.containerenv
+    mise activate fish | source
+
+    alias vi nvim
+    alias vim nvim
+
+    alias ll 'ls -l'
+
+    setenv EDITOR nvim
+    setenv SSH_AUTH_SOCK /tmp/ssh-agent
+end
+```
