@@ -4,7 +4,7 @@ date: 2026-05-28T09:56:28+03:00
 categories:
   - Technical
 ---
-A while back I switched to NixOS. Then when I started playing with Rust, I found out Rust does not play nicely with Nix. So I went on the journy of finding an alternative.<!--more-->
+A while back I switched to NixOS. Then when I started playing with Rust, I found out Rust does not play nicely with Nix. So I went on the journey of finding an alternative.<!--more-->
 
 I started experimenting with a few solutions: [distrobox](https://distrobox.it/), [Devbox](https://www.jetify.com/devbox), [Dev Containers](https://code.visualstudio.com/docs/devcontainers/containers). They all had their pros and cons, e.g. distrobox would pollute my home directory and the last version I used kept freezing.
 
@@ -19,9 +19,7 @@ The solution I ended up with is a custom development container with [podman](htt
 * Unlike Docker, podman doesn't mess with iptables.
 
 
-To achieve this I used 2 wrapper scripts and a small configuration file
-
-Now for the scripts:
+To achieve this I used 2 wrapper scripts and a small configuration file:
 
 ```bash {filename="devenv-buildimage"}
 #!/bin/bash
@@ -242,7 +240,7 @@ eval "$PODMAN_CMD"
 Last but not least, the configuration file
 ```ini
 # Example file, just save as .devenv in the root of your project
-name=nix
+name=my-development-container
 image=devcontainer
 
 # The root of the project goes to /workspace
