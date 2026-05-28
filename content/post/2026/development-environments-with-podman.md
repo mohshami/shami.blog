@@ -4,22 +4,21 @@ date: 2026-05-28T09:56:28+03:00
 categories:
   - Technical
 ---
-A while back I switched to NixOS. Then when I started playing with Rust, I found out Rust does not play nicely with Nix. So I went on the journey of finding an alternative.<!--more-->
+I switched to NixOS a while back. Then I tried to learn Rust. Turns out, Rust does not play nicely with Nix. So the journey of finding an alternative began.<!--more-->
 
-I started experimenting with a few solutions: [distrobox](https://distrobox.it/), [Devbox](https://www.jetify.com/devbox), [Dev Containers](https://code.visualstudio.com/docs/devcontainers/containers). They all had their pros and cons, e.g. distrobox would pollute my home directory and the last version I used kept freezing.
+Experimentation started with a few solutions: [distrobox](https://distrobox.it/), [Devbox](https://www.jetify.com/devbox), [Dev Containers](https://code.visualstudio.com/docs/devcontainers/containers), and [DevPod](https://devpod.sh/). They all had their pros and cons, but none of them felt right.
 
-The solution I ended up with is a custom development container with [podman](https://podman.io/) and [mise-en-place](https://mise.jdx.dev/). The benefits of the setup are:
-* Allows simulating production environments more closely. Like mounting an Ansible configuration to `/ansible`, similar to the [Semaphore UI](https://semaphoreui.com/) server.
-* Extremely flexible, can simulate almost any environment. I use Debian slim, you can use whatever suits your needs.
-* Shared UID/GID between the host and container, user can edit their files from either.
-* Perfect for use with [Neovim](https://neovim.io), my favorite IDE/text editor, with custom configurations/LSPs per container.
+The solution that ended up working is a custom development container with [podman](https://podman.io/) and [mise-en-place](https://mise.jdx.dev/). The benefits of this setup are:
+* Extremely flexible, can simulate almost any environment. This example uses Debian slim, but any base image that suits your needs works.
+* Shared UID/GID between the host and container; files can be edited from either the host or container.
+* Perfect for use with [Neovim](https://neovim.io), with custom configurations/LSPs per container.
 * Allows usage over SSH, even from a phone or tablet.
 * Isolates changes from the host.
 * Gives least amount of access to the tools running inside the container. Useful when using tools like [pi](https://pi.dev).
-* Unlike Docker, podman doesn't mess with iptables.
+* Unlike Docker, podman doesn't mess with iptables and doesn't have to run as root.
 
 
-To achieve this I used 2 wrapper scripts and a small configuration file:
+To achieve this, 2 wrapper scripts and a small configuration file were used:
 
 ```bash {filename="devenv-buildimage"}
 #!/bin/bash
@@ -287,7 +286,7 @@ Match exec "test \"$container\" = 'podman'"
     UserKnownHostsFile /tmp/known_hosts_podman
 ```
 
-For fish, I have the following customizations in `~/.config/fish/conf.d/mise.fish`
+For fish, the following customizations in `~/.config/fish/conf.d/mise.fish` work well:
 ```fish
 if test "$container" = podman; or test -f /run/.containerenv
     mise activate fish | source
