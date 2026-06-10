@@ -73,7 +73,7 @@
   const resultsContent = document.getElementById('search-results-content');
   const mainContent = document.getElementById('main-content');
 
-  let debounceTimer = null;
+  let currentSearch = null;
 
   async function doSearch(query) {
     if (!query || query.trim() === '') {
@@ -82,15 +82,12 @@
       return;
     }
 
-    const result = await debouncedSearch(query, {}, 200);
-    if (!result || !result.results) {
-      resultsContent.innerHTML = '<p class="text-gray-500">No results found.</p>';
-      resultsContainer.classList.remove('hidden');
-      mainContent.classList.add('hidden');
-      return;
-    }
+    const mySearch = ++currentSearch;
+    const result = await debouncedSearch(query, {}, 100);
 
-    if (result.results.length === 0) {
+    if (mySearch !== currentSearch) return;
+
+    if (!result || !result.results || result.results.length === 0) {
       resultsContent.innerHTML = '<p class="text-gray-500">No results found.</p>';
       resultsContainer.classList.remove('hidden');
       mainContent.classList.add('hidden');

@@ -611,3 +611,29 @@ Hugo's Chroma syntax highlighter with `lineNos = true` generates inline line num
 
 ### Known issues / follow-up
 - The Cloudflare Pages dashboard build command must be manually updated to `npm install && npm run build` if it was previously set to just `hugo`.
+
+---
+
+## 2026-06-10 — Improved search responsiveness and result timing
+
+### What was changed and why
+The search felt sluggish because the debounce was 200ms and there was no guard against stale results. When a user typed quickly, an older search could overwrite a newer one. Also, the user wanted the posts to stay visible until results were actually fetched, and "No results found" to only appear after the search completes.
+
+### Files touched
+- **themes/shami.blog/layouts/_default/baseof.html** — Updated the search JS module:
+  1. Reduced debounce from `200ms` to `100ms` for faster response
+  2. Added a `currentSearch` counter to discard stale results when a newer search is triggered
+  3. Simplified the no-results logic so it only hides posts and shows "No results found" after `debouncedSearch` actually completes
+  4. Kept the main content visible during the search, only hiding it after results are ready
+
+### Decisions made with rationale
+- Lowered debounce to `100ms` because Pagefind is fast enough to handle more frequent queries without feeling laggy.
+- Added a `currentSearch` race guard because `debouncedSearch` returns a Promise and rapid typing could cause out-of-order results to render.
+- Combined the `!result || !result.results || result.results.length === 0` checks into a single condition to avoid duplicated code.
+
+### Verification
+- Rebuilt with `npm run build` and confirmed no errors.
+- Inspected the generated JS in `public/index.html` to confirm `debouncedSearch(query, {}, 100)` and the `currentSearch` guard.
+
+### Known issues / follow-up
+- The Cloudflare Pages dashboard build command must be manually updated to `npm install && npm run build` if it was previously set to just `hugo`.
