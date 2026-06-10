@@ -3,8 +3,8 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "build": "hugo && npx pagefind --site public",
-    "dev": "hugo && npx pagefind --site public && hugo server -p 1313 --bind 0.0.0.0"
+    "build": "hugo && npx pagefind --site public --exclude-selectors '[style*=\"user-select:none\"]'",
+    "dev": "hugo && npx pagefind --site public --exclude-selectors '[style*=\"user-select:none\"]' && hugo server -p 1313 --bind 0.0.0.0"
   },
   "devDependencies": {
     "pagefind": "^1.5.2"

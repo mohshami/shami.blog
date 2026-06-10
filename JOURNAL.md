@@ -556,3 +556,58 @@ The search results were showing the full HTML `<title>` tag text (`Post Title | 
 
 ### Known issues / follow-up
 - `hugo server` does not auto-re-run Pagefind on content changes. Stop and re-run `npm run dev` to refresh the index after editing posts.
+
+---
+
+## 2026-06-10 — Added Pagefind to Cloudflare Pages build pipeline
+
+### What was changed and why
+Pagefind was only running locally during development. For production, the Cloudflare Pages build pipeline only ran `hugo`, which meant the `public/pagefind/` search index was never generated on deploy. Added the necessary files and configuration so Pagefind indexes the site during every Cloudflare Pages build.
+
+### Files touched
+- **.nvmrc** (new) — Pins Node.js to v20, matching the local development environment. Cloudflare Pages reads this file to select the Node.js version.
+- **package.json** — Updated the `build` and `dev` scripts to use `npx pagefind` instead of `pagefind` directly. This ensures the correct binary is resolved regardless of PATH setup.
+
+### Cloudflare Pages dashboard configuration
+
+| Setting | Value |
+|---------|-------|
+| **Build command** | `npm install && npm run build` |
+| **Build output directory** | `public` |
+
+The `npm install` step installs `pagefind` from `devDependencies`. The `npm run build` script runs `hugo && npx pagefind --site public`, so the index is always generated from the freshly built HTML.
+
+### Decisions made with rationale
+- Used `npx pagefind` in the build script instead of relying on the binary being in PATH. `npx` resolves the binary from `node_modules/.bin/`, which works consistently across local dev and Cloudflare Pages.
+- Created `.nvmrc` instead of relying on the Cloudflare Pages default Node.js version. This ensures the local and CI environments use the same Node.js version.
+- Kept the build output directory as `public` (Hugo's default) so Cloudflare Pages serves the built site correctly.
+
+### Verification
+- Rebuilt locally with `npm run build` and confirmed `public/pagefind/` is generated correctly.
+- Verified the `npx pagefind` command resolves and runs the locally installed Pagefind v1.5.2.
+
+### Known issues / follow-up
+- The Cloudflare Pages dashboard build command must be manually updated to `npm install && npm run build` if it was previously set to just `hugo`.
+
+---
+
+## 2026-06-10 — Excluded Chroma line numbers from Pagefind index
+
+### What was changed and why
+Hugo's Chroma syntax highlighter with `lineNos = true` generates inline line numbers as `<span>` elements with `user-select:none` inline styles. These line numbers (e.g., "1", "2", "3") were being indexed by Pagefind as searchable words, polluting the search index with irrelevant numeric terms. The user wanted the code content to remain searchable but the line numbers to be ignored.
+
+### Files touched
+- **package.json** — Added `--exclude-selectors '[style*="user-select:none"]'` to both the `build` and `dev` scripts. This tells Pagefind to skip any element whose inline style contains `user-select:none` during indexing.
+
+### Decisions made with rationale
+- Used `--exclude-selectors` (a Pagefind CLI option) instead of `data-pagefind-ignore` attributes. This is because Hugo generates the line number HTML with inline styles (`noClasses = true` means no CSS classes to target), so there's no clean way to add attributes to the generated spans without a custom render hook.
+- The selector `[style*="user-select:none"]` is safe because the site only uses `user-select:none` in Chroma line number spans. Verified via `grep` that no other elements on the site use this inline style.
+- The code content itself is still indexed because the code text lives in sibling `<span>` elements that do NOT have `user-select:none`.
+
+### Verification
+- Rebuilt with `npm run build`. Pagefind reported `Indexed 6044 words` (down from `6839` before the fix), confirming that line numbers were removed from the index.
+- `grep` confirmed that `user-select:none` only appears in Chroma line number spans across the entire site.
+- Inspected a Pagefind fragment file and confirmed that code content (e.g., `chainloader (hd1)+1`) is still present without the line numbers interleaved.
+
+### Known issues / follow-up
+- The Cloudflare Pages dashboard build command must be manually updated to `npm install && npm run build` if it was previously set to just `hugo`.
