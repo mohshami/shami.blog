@@ -1,6 +1,6 @@
 {{ define "main" }}
 <div class="px-8 py-5 bg-white m-3 rounded-lg">
-  <h2 class="text-3xl font-semibold text-center">{{ .Title }}</h2>
+  <h2 class="text-3xl font-semibold text-center" data-pagefind-meta="post_title">{{ .Title }}</h2>
   <div class="post-meta">
     <time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "2006-01-02" }}</time>
     <span class="post-dot">&middot;</span>
@@ -11,6 +11,6 @@
       {{ end }}
     {{ end }}
   </div>
-  <div class="article">{{ .Content }}</div>
+  <div class="article" {{ if eq .Section "post" }}data-pagefind-body{{ end }}>{{ .Content }}</div>
 </div>
 {{ end }}

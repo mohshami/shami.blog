@@ -378,3 +378,181 @@ The Google search form existed in two places: once in the mobile header area (`b
 ### Verification
 - Verified the partial file was created and both templates reference it correctly.
 - No functional changes expected; the visible/hidden behavior (`md:hidden` vs `hidden md:block`) remains controlled by the parent containers in each template.
+
+---
+
+## 2026-06-10 — Replaced Google search with Pagefind
+
+### What was changed and why
+Replaced the Google webform search with Pagefind, a fully static search engine that indexes the built HTML files. This removes the external Google dependency and gives instant search results without sending queries to a third party. Pagefind was configured to **only index individual blog posts**, skipping listing pages, taxonomy pages, and paginator pages.
+
+### Files touched
+- **package.json** — Added `pagefind` as a devDependency and created `build` and `dev` npm scripts
+- **mise.toml** — Added `node` and `npm` tool definitions for the project
+- **themes/shami.blog/layouts/partials/head.html** — Added `<link>` and `<script>` tags for Pagefind UI CSS and JS
+- **themes/shami.blog/layouts/partials/search-form.html** — Replaced Google form with a Pagefind UI container (`<div id="...">`) and initialization script
+- **themes/shami.blog/layouts/_default/baseof.html** — Added `data-pagefind-ignore` to `<html>` to skip all pages by default; passed `"search-mobile"` ID to the search partial
+- **themes/shami.blog/layouts/partials/sidebar.html** — Passed `"search-desktop"` ID to the search partial
+- **themes/shami.blog/layouts/_default/single.html** — Added `data-pagefind-body` to the article div so only blog posts are indexed
+
+### Decisions made with rationale
+- **Used a partial with parameterized IDs** (`search-mobile` / `search-desktop`) because Pagefind UI needs a unique target element per instance. The responsive containers (`md:hidden` / `hidden md:block`) already ensure only one is visible at a time.
+- **Added `data-pagefind-ignore` to `<html>` and `data-pagefind-body` to posts** instead of CLI filtering. This is the native Pagefind way to control indexing and keeps the build command simple (`pagefind --site public`).
+- **Installed Pagefind via npm** rather than a global binary so the version is pinned in `package.json` and works across environments.
+- **Used the Default Pagefind UI** (`pagefind-ui.js`) rather than the newer Component UI. The Component UI is recommended for new projects, but the Default UI is simpler to drop into existing containers and is fully supported.
+
+### How to test
+
+**Production build:**
+```bash
+npm run build
+# Serves the public/ directory with search working
+```
+
+**Development server:**
+```bash
+npm run dev
+# 1. Builds the site to public/
+# 2. Runs pagefind to index only posts
+# 3. Starts hugo server on http://localhost:1313
+```
+
+> **Note:** `hugo server` watches for changes and rebuilds, but it does **not** automatically re-run Pagefind. If you edit content and want the search index updated, stop the server and re-run `npm run dev`.
+
+### Verification
+- Ran `npm run build` successfully. Pagefind reported:
+  - `Found a data-pagefind-body element on the site. Ignoring pages without this tag.`
+  - `Indexed 1 language, Indexed 135 pages` (matching the 135 individual blog posts).
+- Ran `npm run dev` and confirmed `hugo server` serves the pre-built pagefind assets from `public/pagefind/`.
+- `curl` verified that both `pagefind-ui.js` and `pagefind-ui.css` are reachable at `//localhost:1313/pagefind/...`.
+- Verified that the old Google form (`//google.com/search`) no longer appears in the generated HTML.
+
+### Known issues / follow-up
+- The Default Pagefind UI styling may need minor CSS tweaks to match the existing Tailwind theme perfectly.
+- Consider switching to the Pagefind Component UI in the future for a search modal and better accessibility (Pagefind recommends this as of v1.5.0).
+
+---
+
+## 2026-06-10 — Moved search from sidebar to main content area
+
+### What was changed and why
+The search box was split across two locations: a mobile-only instance in the main content area (`md:hidden`) and a desktop-only instance in the sidebar (`hidden md:block`). The user wanted the search results to appear in the content section, not the sidebar. Consolidated into a single search instance visible on all screen sizes in the main content column.
+
+### Files touched
+- **themes/shami.blog/layouts/_default/baseof.html** — Replaced the `md:hidden` mobile-only search wrapper with a single `px-8 py-5 bg-white m-3 rounded-lg` container in the main content area. Updated the partial call to use `id "search"`.
+- **themes/shami.blog/layouts/partials/sidebar.html** — Removed the `hidden md:block` desktop-only search wrapper entirely.
+
+### Decisions made with rationale
+- Removed the dual-instance approach because the Default Pagefind UI renders its results dropdown directly below the search input. Having results in the sidebar would make them cramped and hard to read. Moving the search to the main content area gives the dropdown plenty of horizontal space on both mobile and desktop.
+- Kept the same `search-form.html` partial so the UI remains maintainable; only the placement and ID changed.
+
+### Verification
+- Rebuilt the site with `hugo` and confirmed via `curl` that only one `id="search"` exists in the generated HTML.
+- Confirmed that `search-desktop` and `search-mobile` IDs no longer appear anywhere in the output.
+- Ran `npm run dev` and verified the dev server starts cleanly with the search present in the content area.
+
+### Known issues / follow-up
+- None.
+
+---
+
+## 2026-06-10 — Reverted search box location, results now in main content area
+
+### What was changed and why
+The user wanted the search box back in its original responsive locations (mobile header + desktop sidebar), but with search results rendered in the main content area instead of a dropdown. When results are shown, all other content in that section is hidden. To achieve this, replaced the Pagefind Default UI with a custom integration using the Pagefind JavaScript API directly.
+
+### Files touched
+- **themes/shami.blog/layouts/partials/head.html** — Removed `pagefind-ui.css` and `pagefind-ui.js` (Default UI); added `pagefind.js` as a module script
+- **themes/shami.blog/layouts/_default/baseof.html** — Reverted to dual search box placement (mobile `md:hidden` + desktop in sidebar); added `#search-results` container in main content area; wrapped `{{- block "main" . }}` in `#main-content` so it can be hidden; added a `<script type="module">` that imports `debouncedSearch` from Pagefind, wires both inputs, and renders results into `#search-results`
+- **themes/shami.blog/layouts/partials/sidebar.html** — Re-added the `hidden md:block` desktop-only search wrapper
+- **themes/shami.blog/layouts/partials/search-form.html** — Replaced the Pagefind UI container with a plain `<input>` element styled with the existing Tailwind/sprite classes
+
+### Decisions made with rationale
+- **Used the Pagefind JS API directly** instead of the Default UI or Component UI because neither supports separating the search input from the results container. The low-level API gives full control over where results are rendered.
+- **Loaded `pagefind.js` as `type="module"`** so it works with ES module imports. The module's `import.meta.url` correctly resolves the `/pagefind/` base path for loading WASM and metadata.
+- **Used `debouncedSearch` with 200ms debounce** to avoid excessive API calls while typing.
+- **Kept both inputs in sync** so typing in either the mobile or desktop input updates the other and triggers a single search.
+- **Results are rendered with custom HTML** (not a Pagefind component) so they can be styled to match the existing Tailwind theme.
+
+### How to test
+
+**Production build:**
+```bash
+npm run build
+# Serves the public/ directory with search working
+```
+
+**Development server:**
+```bash
+npm run dev
+# 1. Builds the site to public/
+# 2. Runs pagefind to index only posts
+# 3. Starts hugo server on http://localhost:1313
+```
+
+**Manual verification:**
+1. Open `http://localhost:1313/` on a desktop browser — the search box should be in the sidebar
+2. Open the same page on a mobile viewport (or check the HTML) — the search box should appear at the top of the main content area
+3. Type a query in either search box — the main content area should switch to showing search results, hiding the blog posts
+4. Clear the search input — the main content area should switch back to showing blog posts
+
+### Verification
+- Ran `npm run dev` and confirmed the server starts cleanly.
+- `curl` verified that both `search-mobile-input` and `search-desktop-input` exist in the generated HTML.
+- `curl` verified that `#search-results` and `#main-content` containers exist in the main content area.
+- `curl` verified that no `pagefind-ui` or `google.com/search` references remain in the HTML.
+- Pagefind indexing still reports `Indexed 135 pages` (matching the blog post count).
+
+### Known issues / follow-up
+- The search results styling is basic (custom HTML with Tailwind classes). Consider refining the look of result excerpts, titles, and empty states.
+- `hugo server` does not auto-re-run Pagefind on content changes. Stop and re-run `npm run dev` to refresh the index after editing posts.
+
+---
+
+## 2026-06-10 — Styled search results like article blocks
+
+### What was changed and why
+The search results were rendered as plain text links with minimal styling. The user wanted them to match the existing blog post cards (`px-8 py-5 bg-white m-3 rounded-lg` with centered title and `article` content div). Updated the search results rendering to match the article block layout.
+
+### Files touched
+- **themes/shami.blog/layouts/_default/baseof.html** — Two changes:
+  1. Removed `px-8 py-5 bg-white m-3 rounded-lg` from the outer `#search-results` wrapper so the wrapper itself isn't a card
+  2. Updated the results rendering JS to output each result as a `<div class="px-8 py-5 bg-white m-3 rounded-lg">` with `<h2 class="text-3xl font-semibold text-center"><a href="...">...</a></h2>` and `<div class="article">...</div>` matching the `list.html` / `single.html` article blocks
+
+### Decisions made with rationale
+- Each search result is its own card so the visual rhythm matches the blog post listing page. This is more familiar to readers than a compact list.
+- Removed the outer card styling from `#search-results` to avoid nesting cards inside cards.
+- Kept the `<div class="article">` wrapper on excerpts so any existing `.article` CSS rules (e.g., typography, line-height) apply to search excerpts too.
+
+### Verification
+- Rebuilt with `npm run build` and verified no errors.
+- Inspected generated HTML with `curl` — the `#search-results` wrapper now has no card classes, and the JS renders per-result cards with matching classes.
+- `npm run dev` confirmed the server starts cleanly.
+
+### Known issues / follow-up
+- `hugo server` does not auto-re-run Pagefind on content changes. Stop and re-run `npm run dev` to refresh the index after editing posts.
+
+---
+
+## 2026-06-10 — Fixed search result titles to show post title instead of blog title
+
+### What was changed and why
+The search results were showing the full HTML `<title>` tag text (`Post Title | Shami's Blog`) instead of just the post title. The `<title>` tag includes the site name suffix (` | Shami's Blog`), which was bleeding into the search result card titles.
+
+### Files touched
+- **themes/shami.blog/layouts/_default/single.html** — Added `data-pagefind-meta="post_title"` to the `<h2>` element so Pagefind indexes the clean post title as a separate metadata field
+- **themes/shami.blog/layouts/_default/baseof.html** — Updated the search results JS to:
+  1. Prefer `data.meta.post_title` (the clean title from the h2) over `data.meta.title` (the `<title>` tag)
+  2. Fall back to stripping ` | Shami's Blog` from `data.meta.title` as a safety net
+
+### Decisions made with rationale
+- Added `data-pagefind-meta` on the h2 element because the `<title>` tag is controlled by the head template and includes the site name suffix. Pagefind's native metadata extraction can't distinguish between the two.
+- The JS fallback regex strip ensures that even if `post_title` is unavailable for some reason, the title won't show the site name suffix.
+
+### Verification
+- Rebuilt with `npm run build`. Pagefind re-indexed 135 pages.
+- `grep` confirmed that `data-pagefind-meta="post_title"` appears in the generated post HTML.
+- `grep` confirmed the JS uses `data.meta.post_title` with the fallback regex.
+
+### Known issues / follow-up
+- `hugo server` does not auto-re-run Pagefind on content changes. Stop and re-run `npm run dev` to refresh the index after editing posts.

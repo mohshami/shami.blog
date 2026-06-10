@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en" xml:lang="en">
+<html lang="en" xml:lang="en" data-pagefind-ignore>
 {{- partial "head.html" . -}}
 <body class="bg-light-body text-light-text">
   <div class="flex flex-col h-screen justify-between">
@@ -8,9 +8,14 @@
       <div class="md:flex max-w-screen-xl m-auto text-justify">
         <div class="w-full md:w-3/4">
           <div class="md:hidden px-8 py-5 bg-white m-3 rounded-lg">
-            {{ partial "search-form.html" . }}
+            {{ partial "search-form.html" (dict "id" "search-mobile") }}
           </div>
-        {{- block "main" . }}{{- end }}
+          <div id="search-results" class="hidden">
+            <div id="search-results-content"></div>
+          </div>
+          <div id="main-content">
+            {{- block "main" . }}{{- end }}
+          </div>
       </div>
         {{- partial "sidebar.html" . -}}
       </div>
@@ -58,6 +63,77 @@
       pre.parentNode.insertBefore(btn, pre);
     });
   });
+</script>
+<script type="module">
+  import { debouncedSearch } from '/pagefind/pagefind.js';
+
+  const mobileInput = document.getElementById('search-mobile-input');
+  const desktopInput = document.getElementById('search-desktop-input');
+  const resultsContainer = document.getElementById('search-results');
+  const resultsContent = document.getElementById('search-results-content');
+  const mainContent = document.getElementById('main-content');
+
+  let debounceTimer = null;
+
+  async function doSearch(query) {
+    if (!query || query.trim() === '') {
+      resultsContainer.classList.add('hidden');
+      mainContent.classList.remove('hidden');
+      return;
+    }
+
+    const result = await debouncedSearch(query, {}, 200);
+    if (!result || !result.results) {
+      resultsContent.innerHTML = '<p class="text-gray-500">No results found.</p>';
+      resultsContainer.classList.remove('hidden');
+      mainContent.classList.add('hidden');
+      return;
+    }
+
+    if (result.results.length === 0) {
+      resultsContent.innerHTML = '<p class="text-gray-500">No results found.</p>';
+      resultsContainer.classList.remove('hidden');
+      mainContent.classList.add('hidden');
+      return;
+    }
+
+    let html = '';
+
+    for (const res of result.results) {
+      const data = await res.data();
+      let title = data.meta.post_title || data.meta.title || data.url;
+      title = title.replace(/ \| Shami's Blog$/, '');
+      html += '<div class="px-8 py-5 bg-white m-3 rounded-lg">';
+      html += '<h2 class="text-3xl font-semibold text-center"><a href="' + escapeHtml(data.url) + '">' + escapeHtml(title) + '</a></h2>';
+      html += '<div class="article">' + (data.excerpt || '') + '</div>';
+      html += '</div>';
+    }
+
+    resultsContent.innerHTML = html;
+    resultsContainer.classList.remove('hidden');
+    mainContent.classList.add('hidden');
+  }
+
+  function escapeHtml(text) {
+    if (!text) return '';
+    const div = document.createElement('div');
+    div.textContent = text;
+    return div.innerHTML;
+  }
+
+  function onInput(e) {
+    const query = e.target.value;
+    if (mobileInput && e.target !== mobileInput) mobileInput.value = query;
+    if (desktopInput && e.target !== desktopInput) desktopInput.value = query;
+    doSearch(query);
+  }
+
+  if (mobileInput) {
+    mobileInput.addEventListener('input', onInput);
+  }
+  if (desktopInput) {
+    desktopInput.addEventListener('input', onInput);
+  }
 </script>
 </body>
 </html>

@@ -51,7 +51,6 @@
   <link rel="shortlink" href="{{ .Permalink }}" />
   <link rel="canonical" href="{{ .Permalink }}" />
   <link rel="icon" href="/favicon.svg" type="image/svg+xml">
-
   <meta name="twitter:title" content="Shami&#39;s Blog">
   <meta property="og:url" content="https://shami.blog/">
 
@@ -63,6 +62,7 @@
 
     <link rel="stylesheet" href="https://rawcdn.githack.com/nextapps-de/spotlight/0.7.8/dist/css/spotlight.min.css">
     <script src="https://rawcdn.githack.com/nextapps-de/spotlight/0.7.8/dist/js/spotlight.min.js"></script>
+    <script src="/pagefind/pagefind.js" type="module"></script>
 
     {{ range .AlternativeOutputFormats -}}
     {{ printf `<link rel="%s" type="%s" href="%s" title="%s">` .Rel .MediaType.Type .Permalink $.Site.Title | safeHTML }}
