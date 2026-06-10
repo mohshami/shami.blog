@@ -359,3 +359,22 @@ Hyperlinks in the middle of sentences followed by punctuation (e.g., `[link](url
 ### Verification
 - Rebuilt the site with `hugo` and inspected generated HTML.
 - Confirmed that links followed by commas, periods, etc., no longer have a newline/space between `</a>` and the punctuation (e.g., `...<a href="...">Microsoft</a>, you can't...` instead of `...<a href="...">Microsoft</a>\n, you can't...`).
+
+---
+
+## 2026-06-10 — Extracted search form into reusable partial
+
+### What was changed and why
+The Google search form existed in two places: once in the mobile header area (`baseof.html`) and once in the sidebar (`sidebar.html`). Both forms were identical but had duplicated markup. Extracted the form into a single reusable partial to eliminate duplication and make future changes easier.
+
+### Files touched
+- **themes/shami.blog/layouts/partials/search-form.html** (new) — Contains the shared Google search form markup
+- **themes/shami.blog/layouts/_default/baseof.html** — Replaced inline form with `{{ partial "search-form.html" . }}`
+- **themes/shami.blog/layouts/partials/sidebar.html** — Replaced inline form with `{{ partial "search-form.html" . }}`
+
+### Decisions made with rationale
+- Chose a **partial** instead of a Hugo shortcode because shortcodes are intended for use inside markdown content, whereas partials are the correct abstraction for reusable fragments inside templates/layouts.
+
+### Verification
+- Verified the partial file was created and both templates reference it correctly.
+- No functional changes expected; the visible/hidden behavior (`md:hidden` vs `hidden md:block`) remains controlled by the parent containers in each template.
